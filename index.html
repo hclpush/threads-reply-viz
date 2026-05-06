@@ -136,7 +136,7 @@ function bS(){
     + '<span class="cn">'+t("all_categories")+'</span>'
     + '<span class="cc">'+D.total+'</span></div>'
     + '<div class="dv"></div>';
-  D.catLabels.forEach(function(mc){
+  D.catLabels.slice().sort(function(a,b){ return D.catStats[b].count-D.catStats[a].count; }).forEach(function(mc){
     var s=D.catStats[mc], ia=(af&&af.c===mc&&!af.s);
     h += '<div class="ci'+(ia?" on":"")+'" data-cat="'+esc(mc)+'">'
       + '<div class="cd" style="background:'+CC[mc]+'"></div>'
