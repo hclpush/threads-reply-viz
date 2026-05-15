@@ -108,9 +108,66 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 ::-webkit-scrollbar-thumb:hover{background:#555}
 
 @media(max-width:700px){.main{flex-direction:column;height:auto;overflow:auto}.sb{width:100%;border-right:none;border-bottom:1px solid var(--br)}.cw{height:130px}.tc,.ta2{display:none}}
+
+/* ── Welcome Modal ── */
+.wm-ov{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.wm-card{background:#141414;border:1px solid #252525;border-radius:22px;padding:40px 44px 34px;max-width:450px;width:100%;text-align:center;box-shadow:0 32px 96px rgba(0,0,0,.85)}
+.wm-pip{width:32px;height:3px;background:#222;border-radius:2px;margin:0 auto 28px}
+.wm-tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+.wm-h1{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1.25;margin-bottom:3px}
+.wm-h1.dim{color:#666;margin-bottom:20px}
+.wm-h2{font-size:13px;font-weight:400;color:#555;line-height:1.5;margin-bottom:22px}
+.wm-div{height:1px;background:#1d1d1d;margin:0 0 22px}
+.wm-lr{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px}
+.wm-ll{font-size:12px;color:#3e3e3e}
+.wm-tg{display:flex;background:#1a1a1a;border:1px solid #222;border-radius:20px;padding:2px}
+.wm-lb{padding:5px 18px;font-size:12px;font-weight:600;cursor:pointer;color:#3e3e3e;border:none;background:transparent;border-radius:16px;transition:all 140ms ease;font-family:var(--fn)}
+.wm-lb.on{background:#fff;color:#000}
+.wm-cta{width:100%;padding:13px;background:var(--ac);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--fn);letter-spacing:.03em;transition:opacity 140ms;margin-bottom:16px}
+.wm-cta:hover{opacity:.82}
+.wm-ns{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;color:#666;cursor:pointer;user-select:none}
+.wm-ns input{accent-color:#666;cursor:pointer}
+
+/* ── Category Popover ── */
+.qi{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;font-size:9px;line-height:1;color:#2c2c2c;cursor:pointer;flex-shrink:0;border:none;background:transparent;transition:color 120ms;font-family:var(--fn);padding:0}
+.qi:hover{color:#777}
+.pop{position:fixed;z-index:500;background:#1e1e1e;border:1px solid #2d2d2d;border-radius:10px;padding:11px 14px;font-size:11.5px;line-height:1.6;color:#888;max-width:215px;box-shadow:0 10px 36px rgba(0,0,0,.75);pointer-events:none;opacity:0;transition:opacity 100ms ease;white-space:normal;display:none}
+.pop.on{opacity:1;display:block}
+
+/* ── ZH badge (language/culture-specific jokes) ── */
+.zh-b{display:inline-flex;align-items:center;font-size:9px;font-weight:700;letter-spacing:.04em;color:#8a6a00;background:#2a2000;border:1px solid #3d3000;border-radius:4px;padding:1px 5px;margin-left:4px;flex-shrink:0;cursor:default;vertical-align:middle}
+.sbg .zh-b{margin-left:3px}
+
+/* ── Universal filter button ── */
+.uf-btn{padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;color:var(--mu);border:1px solid var(--br);background:var(--bg3);border-radius:20px;font-family:var(--fn);transition:all 140ms ease;white-space:nowrap}
+.uf-btn.on{background:var(--ac);border-color:var(--ac);color:#fff}
+
+/* ── Chart hint ── */
+.ch-hint{font-size:10px;color:#282828;text-align:center;padding:5px 0 0;letter-spacing:.03em;transition:color 300ms}
+.ch-hint.glow{color:#555}
 </style>
 </head>
 <body>
+<div id="wm" class="wm-ov">
+  <div class="wm-card">
+    <div class="wm-pip"></div>
+    <div class="wm-tag">@betabreakhsin</div>
+    <h2 class="wm-h1">Viral Post</h2>
+    <p class="wm-h1 dim">Collection of Cringe Moments</p>
+    <p class="wm-h2">Aim to make you laugh</p>
+    <div class="wm-div"></div>
+    <div class="wm-lr">
+      <span class="wm-ll">Language:</span>
+      <div class="wm-tg">
+        <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
+        <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
+      </div>
+    </div>
+    <button class="wm-cta" onclick="wClose()">Start Exploring &#8594;</button>
+    <label class="wm-ns"><input type="checkbox" id="wm-ns"> Don't show this again</label>
+  </div>
+</div>
+<div id="pop" class="pop"></div>
 <div class="hd">
   <div><h1 id="ht"></h1><p id="hs"></p></div>
   <div class="hr">
@@ -122,12 +179,13 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
       <button id="blk" onclick="sV('likes')"></button>
       <button id="bct" onclick="sV('count')"></button>
     </div>
+    <button id="buo" class="uf-btn" onclick="sU()"></button>
   </div>
 </div>
 <div class="main">
   <div class="sb"><h3 id="sb_title">&#39006;&#21029;</h3><div id="sl"></div></div>
   <div class="ct">
-    <div class="ca"><div class="cw"><canvas id="ch"></canvas></div></div>
+    <div class="ca"><div class="cw"><canvas id="ch"></canvas></div><p class="ch-hint" id="ch-hint">&#8593; Click a bar to filter by category</p></div>
     <div class="ta">
       <div class="sr"><input id="si" type="text" placeholder="..." oninput="rT()"></div>
       <div class="ts">
@@ -147,6 +205,84 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 <script>
 var D = JSON.parse(decodeURIComponent(escape(atob("__DATA_B64__"))));
 var I = __I18N__;
+
+var CAT_DESC = {
+  "zh": {
+    "口誤": "不小心說錯話，常發生在點餐、工作或日常對話中突然腦當機。",
+    "被工作/兵役制約": "工作或當兵的習慣滲入日常，在奇怪時機做出職業反應。（台灣限定：男性義務兵役）",
+    "認錯人": "誤以為認識某人，結果對著陌生人揮手、擁抱或打招呼。",
+    "當眾出糗": "在眾人面前發生的尷尬瞬間，全場都是見證者。",
+    "其他": "不屬於任何特定分類的其他窘境。",
+    "回覆原 PO": "留言者對原始貼文的反應，不是具體的窘境故事。",
+    "以為在跟自己說話": "誤以為有人在叫你，結果白白答應；或被叫到卻以為不是叫你。",
+    "走錯空間": "走進錯誤的房間、廁所、店家或電梯。",
+    "以為沒人亂講話": "以為沒人在場就亂說話，結果被抓個正著。",
+    "叫錯": "叫錯對方的稱謂，最經典的是叫老師「媽媽」。"
+  },
+  "en": {
+    "口誤": "You accidentally said the wrong word — usually while ordering food, at work, or mid-conversation when your brain short-circuited.",
+    "被工作/兵役制約": "Your job or military service trained your brain so hard the habit leaked into everyday life. Note: Taiwan has mandatory military service for men — some jokes require that context.",
+    "認錯人": "You waved at, hugged, or greeted a complete stranger thinking you recognized them.",
+    "當眾出糗": "An embarrassing moment that happened in front of an audience — with witnesses.",
+    "其他": "Everything else that doesn't fit neatly into the other categories.",
+    "回覆原 PO": "Replies reacting to the original post — appreciation, jokes, or pure vibes. Not a specific cringe story.",
+    "以為在跟自己說話": "You answered someone who wasn't talking to you, or ignored someone who was calling your name.",
+    "走錯空間": "You walked into the wrong room, bathroom, store, or elevator.",
+    "以為沒人亂講話": "You said something you shouldn't have, thinking no one was around — but someone was.",
+    "叫錯": "You called someone by the wrong name. The classic: calling your teacher 'Mom'."
+  }
+};
+
+var uOnly = false;
+
+function tD(c){ return (CAT_DESC[lg] && CAT_DESC[lg][c]) || ""; }
+function tUF(){ return lg==="zh" ? "國際通用笑點" : "Universal only"; }
+function tAF(){ return lg==="zh" ? "全部笑點" : "All jokes"; }
+function tCH(){ return lg==="zh" ? "↑ 點擊長條可篩選類別" : "↑ Click a bar to filter by category"; }
+function zhBadge(){ return '<span class="zh-b" title="'+(lg==="zh"?"語言/文化限定，翻譯後效果可能打折":"Humour relies on Chinese language or local culture&#160;—&#160;may not translate")+'">'+(lg==="zh"?"文化梗":"ZH")+'</span>'; }
+
+/* ── Welcome Modal ── */
+var _wlg = "en";
+function wML(l){
+  _wlg = l;
+  document.getElementById("wlb-en").className = "wm-lb"+(l==="en"?" on":"");
+  document.getElementById("wlb-zh").className = "wm-lb"+(l==="zh"?" on":"");
+}
+function wClose(){
+  if(document.getElementById("wm-ns").checked) localStorage.setItem("wm_s","1");
+  localStorage.setItem("wm_l", _wlg);
+  document.getElementById("wm").style.display="none";
+  sL(_wlg);
+}
+
+/* ── Category Popover ── */
+var _popSrc = null;
+function showPop(e){
+  e.stopPropagation();
+  var btn = e.currentTarget, desc = btn.getAttribute("data-desc");
+  var pop = document.getElementById("pop");
+  if(_popSrc === desc){ hidePop(); return; }
+  _popSrc = desc;
+  pop.textContent = desc;
+  pop.style.display = "block";
+  var r = btn.getBoundingClientRect(), pw = 220;
+  var left = r.right + 8, top = r.top;
+  if(left + pw > window.innerWidth) left = r.left - pw - 8;
+  if(top + 90 > window.innerHeight) top = window.innerHeight - 100;
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+  requestAnimationFrame(function(){ pop.classList.add("on"); });
+}
+function hidePop(){ _popSrc=null; var p=document.getElementById("pop"); if(p){ p.classList.remove("on"); setTimeout(function(){ if(!p.classList.contains("on")) p.style.display="none"; }, 110); } }
+document.addEventListener("click", hidePop);
+
+/* ── Universal filter ── */
+function sU(){
+  uOnly = !uOnly;
+  var b = document.getElementById("buo");
+  if(b){ b.className = "uf-btn"+(uOnly?" on":""); b.textContent = uOnly ? tUF() : tAF(); }
+  rT();
+}
+
 var lg="zh", vw="likes", af=null, AC=null;
 var CC={};
 D.catLabels.forEach(function(c,i){ CC[c]=D.catColors[i]; });
@@ -167,9 +303,11 @@ function bS(){
     + '<div class="dv"></div>';
   D.catLabels.slice().sort(function(a,b){ return D.catStats[b].count-D.catStats[a].count; }).forEach(function(mc){
     var s=D.catStats[mc], ia=(af&&af.c===mc&&!af.s);
+    var _desc=esc(tD(mc));
     h += '<div class="ci'+(ia?" on":"")+'" data-cat="'+esc(mc)+'">'
       + '<div class="cd" style="background:'+CC[mc]+'"></div>'
       + '<span class="cn">'+tC(mc)+'</span>'
+      + (_desc?'<button class="qi" data-desc="'+_desc+'" onclick="showPop(event)">ⓘ</button>':'')
       + '<span class="cc">'+s.count+'</span></div>';
     Object.entries(s.subcategories||{})
       .sort(function(a,b){ return b[1].totalLikes-a[1].totalLikes; })
@@ -265,6 +403,7 @@ function rT(){
   var rows=D.replies;
   if(af) rows=rows.filter(function(r){ return r.c===af.c&&(!af.s||r.s===af.s); });
   if(q) rows=rows.filter(function(r){ return r.t.toLowerCase().indexOf(q)>=0||r.a.toLowerCase().indexOf(q)>=0; });
+  if(uOnly) rows=rows.filter(function(r){ return r.i!==false; });
   rows=rows.slice().sort(function(a,b){ return b.l-a.l; });
   if(!rows.length){ tb.innerHTML=""; nr.style.display="block"; return; }
   nr.style.display="none";
@@ -273,13 +412,14 @@ function rT(){
     var tr=document.createElement("tr");
     var cl=CC[r.c]||"#888";
     var gu="https://translate.google.com/?sl=zh-TW&tl=en&text="+encodeURIComponent(r.t);
-    var sb=r.s ? ('<span class="sbg">'+tS(r.s)+"</span>") : "";
+    var sb=r.s ? ('<span class="sbg">'+tS(r.s)+(r.i===false?zhBadge():'')+"</span>") : "";
+    var zh=(r.i===false && !r.s) ? zhBadge() : '';
     var sf=r.t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     var tt=r.t.replace(/"/g,"&quot;").replace(/\n/g," ");
     var linkHtml=(r.u ? '<a href="'+r.u+'" target="_blank" class="lb">&#128279;</a>' : "")
                 +'<a href="'+gu+'" target="_blank" class="lb">&#127760;</a>';
     tr.innerHTML='<td class="tl">'+r.ls+'</td>'
-      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+tC(r.c)+'</span>'+sb+'</td>'
+      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+tC(r.c)+'</span>'+sb+zh+'</td>'
       +'<td class="ta2">@'+r.a+'</td>'
       +'<td class="tx"><div title="'+tt+'">'+sf+'</div></td>'
       +'<td class="tlk">'+linkHtml+'</td>';
@@ -309,6 +449,8 @@ function aI(){
   document.getElementById("fs").textContent=t("source");
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
+  var bu=document.getElementById("buo"); if(bu){ bu.textContent=uOnly?tUF():tAF(); bu.className="uf-btn"+(uOnly?" on":""); }
+  var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
 }
 
 function sL(l){
@@ -325,7 +467,15 @@ function sV(v){
   aI(); bC();
 }
 
-sL("zh"); bC(); rT();
+(function(){
+  var sl = localStorage.getItem("wm_l") || "en";
+  _wlg = sl; wML(sl);
+  if(localStorage.getItem("wm_s")==="1") document.getElementById("wm").style.display="none";
+  sL(sl); bC(); rT();
+  function pulse(){ var h=document.getElementById("ch-hint"); if(h){ h.classList.add("glow"); setTimeout(function(){ h.classList.remove("glow"); },700); } }
+  setTimeout(pulse, 1800);
+  setInterval(pulse, 6000);
+})();
 </script>
 </body>
 </html>
