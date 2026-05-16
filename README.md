@@ -1,6 +1,6 @@
 # 社死大調查 · Cringe Moments Survey
 
-An interactive analysis of 683 replies to a viral Threads post asking people to share their most embarrassing public moments.
+An interactive analysis of replies to a viral Threads post asking people to share their most embarrassing public moments.
 
 **Source post:** [@betabreakhsin](https://www.threads.com/@betabreakhsin/post/DXzS3YEEY8t) — "大家人生中社死現場第一名是什麼？"
 
@@ -32,33 +32,80 @@ Open `index.html` in any modern browser — no server needed, fully self-contain
 | 回覆原 PO | Reply to OP | 好好笑 · 好好笑長出腹肌 · 留 X 看 · 你好可愛 |
 | 其他 | Others | — |
 
-## Data
+## Data snapshots
 
-Scraped 683 replies from ~1,900 total (top-engagement portion). Data snapshot from 2026-05-03. Likes counts reflect that moment in time.
+| Version | Replies | Scraped | Notes |
+|---|---|---|---|
+| v1 | 683 | 2026-05-03 | Top-engagement replies only; likes reflect that moment |
+| v2 | 1,155 | 2026-05-15 | Added 472 new replies; refreshed like counts for 250 existing replies |
 
-## Files
+## File structure
 
 ```
-data/
-  replies.json            # source of truth — all 683 replies with full fields
-  chart_data.json         # compact format consumed by build.py → index.html
-  category-map.json       # taxonomy reference
-  category-overrides.json # URL → {category, subcategory} overrides
+data/                         # v1 — original snapshot (do not modify)
+  replies.json                  # 683 replies, full fields
+  chart_data.json               # compact format for dashboard
+  category-map.json             # taxonomy reference
+  category-overrides.json       # URL → {category, subcategory} manual overrides
 
-generate_overrides.py     # all manual classifications hardcoded — edit here to reclassify
-apply_overrides.py        # applies overrides to replies.json, rebuilds chart_data.json
-build.py                  # bakes chart_data.json + i18n into index.html
+data-v2/                      # v2 — current dataset
+  replies.json                  # 1,155 replies (v1 + new), merged
+  chart_data.json               # compact format for dashboard
+  category-map.json             # taxonomy reference (copy of v1)
+  category-overrides.json       # overrides (copy of v1; extend here for new replies)
+
+scripts/
+  scrape_new_replies.js         # Playwright scraper — intercepts GraphQL to extract replies + likes
+  package.json                  # playwright dependency
+
+generate_overrides.py           # hardcoded OVERRIDES dict → data/category-overrides.json
+apply_overrides.py              # applies overrides to replies.json, rebuilds chart_data.json
+classify_new_replies.py         # keyword classifier for newly scraped replies
+build_v2_data.py                # merges v1 + new replies, updates likes, rebuilds data-v2/
+build.py                        # bakes chart_data.json + i18n into index.html
 ```
 
-## Reclassifying replies
+## Updating with new replies (v3+)
 
-1. **Edit `generate_overrides.py`** — add/change entries in the `OVERRIDES` dict (key = Threads URL, value = `(category, subcategory|None)`)
-2. **Run** `python3 generate_overrides.py` → overwrites `data/category-overrides.json`
-3. **Restore** `data/replies.json` to its original state before re-running from scratch (overrides apply on top of the original classifications; running `apply_overrides.py` twice will double-apply)
-4. **Run** `python3 apply_overrides.py` → updates `replies.json` + rebuilds `chart_data.json`
-5. **Run** `python3 build.py` → regenerates `index.html`
+```bash
+# 1. Scrape — requires Playwright Chromium and active Threads login in browser profile
+node scripts/scrape_new_replies.js
+# → writes data-v2/raw-scraped.json
 
-To add a new category or subcategory, also update `build.py` — add zh/en labels to both `cat_labels` and `sub_labels` in the `i18n` dict.
+# 2. Classify new replies
+python3 classify_new_replies.py
+# → writes data-v2/classified-new-replies.json
+# → prints 其他 samples for manual review
+
+# 3. (Optional) add URL-based overrides for misclassified items
+#    Edit generate_overrides.py → add to OVERRIDES dict
+#    python3 generate_overrides.py  (writes data/category-overrides.json)
+
+# 4. Merge + rebuild chart data
+python3 build_v2_data.py
+# → writes data-v2/replies.json, data-v2/chart_data.json
+
+# 5. Rebuild dashboard
+python3 build.py --data-dir data-v2
+# → overwrites index.html
+```
+
+## Reclassifying replies (manual overrides)
+
+1. **Edit `generate_overrides.py`** — add entries to `OVERRIDES` dict:
+   `"https://www.threads.com/@user/post/ID": ("category", "subcategory|None")`
+2. `python3 generate_overrides.py` → overwrites `data/category-overrides.json`
+3. `python3 build_v2_data.py` → picks up the updated overrides and rebuilds `data-v2/`
+4. `python3 build.py --data-dir data-v2` → regenerates `index.html`
+
+To add a new category or subcategory, also update `build.py` — add zh/en labels to `cat_labels` and `sub_labels` in the `i18n` dict, and add a color to `CAT_COLORS` in `apply_overrides.py`.
+
+## Scraper notes
+
+- Uses Playwright with a persistent Chrome profile (`mcp-chrome-235b035`) to reuse an active Threads login session
+- Intercepts `api/graphql` responses to extract structured reply data (author, text, likes, timestamp, URL) — more reliable than DOM parsing
+- Scrolls up to 120 times at 1.8s intervals; stops after 6 consecutive scrolls with no new replies
+- Chromium binary path is hardcoded to the local installation — update `CHROMIUM_EXEC` in `scripts/scrape_new_replies.js` if it changes
 
 ---
 

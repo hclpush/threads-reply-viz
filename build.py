@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-import json, base64, os, unicodedata
+import json, base64, os, unicodedata, argparse
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--data-dir', default='data', help='data directory (default: data)')
+args = parser.parse_args()
+
+DATA_DIR = os.path.join(BASE, args.data_dir)
+
 # Load + sanitize data
-with open(os.path.join(BASE, 'data/chart_data.json'), encoding='utf-8') as f:
+with open(os.path.join(DATA_DIR, 'chart_data.json'), encoding='utf-8') as f:
     cd = json.load(f)
 
 def clean(s):
@@ -19,6 +25,8 @@ data_b64 = base64.b64encode(
     json.dumps(cd, ensure_ascii=False).encode('utf-8')
 ).decode('ascii')
 
+total = cd.get('total', len(cd.get('replies', [])))
+
 # i18n — all values will be escaped to \uXXXX by ensure_ascii=True
 i18n = {
     "zh": {
@@ -29,7 +37,7 @@ i18n = {
         "all_categories": "所有類別",
         "col_likes": "喜歡", "col_author": "作者",
         "col_category": "類別", "col_text": "內容", "col_link": "連結",
-        "source": "資料來源：Threads @betabreakhsin · 683 則留言樣本",
+        "source": f"資料來源：Threads @betabreakhsin · {total} 則留言樣本",
         "no_results": "沒有符合的結果",
         "sidebar_title": "類別",
         "cat_labels": {
@@ -75,7 +83,7 @@ i18n = {
         "all_categories": "All Categories",
         "col_likes": "Likes", "col_author": "Author",
         "col_category": "Category", "col_text": "Content", "col_link": "Link",
-        "source": "Source: Threads @betabreakhsin · 683 reply sample",
+        "source": f"Source: Threads @betabreakhsin · {total} reply sample",
         "no_results": "No results found",
         "sidebar_title": "Category",
         "cat_labels": {
@@ -130,3 +138,5 @@ with open(out, 'w', encoding='utf-8') as f:
 sc = html.count('</script>')
 print(f"Written {len(html):,} chars | </script> count: {sc} (expect 2)")
 print(f"data_b64: {len(data_b64):,} chars")
+print(f"Total replies in dashboard: {total}")
+print(f"Data source: {args.data_dir}/")

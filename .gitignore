@@ -1,1 +1,5 @@
 .DS_Store
+scripts/node_modules/
+scripts/package-lock.json
+data-v2/raw-scraped.json
+data-v2/classified-new-replies.json

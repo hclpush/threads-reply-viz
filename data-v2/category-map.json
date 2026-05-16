@@ -1,0 +1,280 @@
+{
+  "categories": [
+    {
+      "label_zh": "回覆原 PO",
+      "label_en": "Reply to Original Poster",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "你好可愛",
+          "label_en": "You are so cute",
+          "main_category": "回覆原 PO",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "好好笑",
+          "label_en": "So funny",
+          "main_category": "回覆原 PO",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "好好笑長出腹肌",
+          "label_en": "Laughing so hard I got abs",
+          "main_category": "回覆原 PO",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "留 X 看",
+          "label_en": "Leaving a mark to watch",
+          "main_category": "回覆原 PO",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "點餐/購物口誤",
+      "label_en": "Ordering/Shopping Slips of the Tongue",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "奶頭",
+          "label_en": "Nipple",
+          "main_category": "點餐/購物口誤",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "以為在跟自己說話",
+      "label_en": "Thinking someone is talking to you",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "以為店員在跟自己說話",
+          "label_en": "Thinking the clerk was talking to me",
+          "main_category": "以為在跟自己說話",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "領錯獎/誤以為得獎",
+          "label_en": "Claiming wrong prize / Thinking I won",
+          "main_category": "以為在跟自己說話",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "以為沒人亂講話",
+      "label_en": "Talking nonsense thinking no one is around",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "https://www.threads.com/@alexandrolin722/post/DX5r0Htmjjs?xmt=AQF0d1LRBgZ_L4VppzaZUnso7P6o5OWDZsnNk6qrbCCdDzcmlC3akrMbUIVWeA9zQrzG72P-&slof=1"
+    },
+    {
+      "label_zh": "叫錯",
+      "label_en": "Calling someone the wrong name/title",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "叫老師媽媽",
+          "label_en": "Calling teacher 'Mom'",
+          "main_category": "叫錯",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "被工作/兵役制約",
+      "label_en": "Conditioned by work/military service",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "一起說歡迎光臨",
+          "label_en": "Saying 'Welcome' out of habit",
+          "main_category": "被工作/兵役制約",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "當完兵喊「有！」",
+          "label_en": "Shouting 'Present!' after military service",
+          "main_category": "被工作/兵役制約",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "認錯人",
+      "label_en": "Mistaking someone for someone else",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "有肢體接觸",
+          "label_en": "With physical contact",
+          "main_category": "認錯人",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "沒有肢體接觸",
+          "label_en": "Without physical contact",
+          "main_category": "認錯人",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        }
+      ]
+    },
+    {
+      "label_zh": "當眾出糗",
+      "label_en": "Public Embarrassment",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": [
+        {
+          "label_zh": "工作中",
+          "label_en": "While working",
+          "main_category": "當眾出糗",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "童言無忌",
+          "label_en": "Children's unfiltered words",
+          "main_category": "當眾出糗",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "學狗叫",
+          "label_en": "Barking like a dog",
+          "main_category": "當眾出糗",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": ""
+        },
+        {
+          "label_zh": "語言不通",
+          "label_en": "Language barrier",
+          "main_category": "當眾出糗",
+          "count": null,
+          "pct_of_count": "",
+          "totalLikes": null,
+          "pct_of_likes": "",
+          "example_url": "https://www.threads.com/@_.gna_/post/DX13LpZmtLA?xmt=AQF0PEed4bwv2SEA975ir7EtWaUaNLLGeM4cWwKTS7IGb4JYqoaj5VXcoWGEUfaj0si6lw&slof=1"
+        }
+      ]
+    },
+    {
+      "label_zh": "走錯店/進錯車",
+      "label_en": "Entering the wrong shop/car",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": []
+    },
+    {
+      "label_zh": "其他",
+      "label_en": "Others",
+      "main_category": null,
+      "count": null,
+      "pct_of_count": "",
+      "totalLikes": null,
+      "pct_of_likes": "",
+      "example_url": "",
+      "subcategories": []
+    }
+  ]
+}
