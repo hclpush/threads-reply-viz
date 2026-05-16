@@ -107,7 +107,7 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:#555}
 
-@media(max-width:700px){.main{flex-direction:column;height:auto;overflow:auto}.sb{width:100%;border-right:none;border-bottom:1px solid var(--br)}.cw{height:130px}.tc,.ta2{display:none}}
+@media(max-width:700px){.main{flex-direction:column;height:auto;overflow:auto}.sb{width:100%;max-height:240px;overflow-y:auto;border-right:none;border-bottom:1px solid var(--br)}.cw{height:130px}#c2,#c3,.tc,.ta2{display:none}}
 
 /* ── Welcome Modal ── */
 .wm-ov{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -143,8 +143,8 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 .uf-btn.on{background:var(--ac);border-color:var(--ac);color:#fff}
 
 /* ── Chart hint ── */
-.ch-hint{font-size:10px;color:#282828;text-align:center;padding:5px 0 0;letter-spacing:.03em;transition:color 300ms}
-.ch-hint.glow{color:#555}
+.ch-hint{font-size:11px;color:#888;text-align:center;padding:5px 0 0;letter-spacing:.03em;transition:color 300ms}
+.ch-hint.glow{color:#ccc}
 </style>
 </head>
 <body>
@@ -152,19 +152,19 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
   <div class="wm-card">
     <div class="wm-pip"></div>
     <div class="wm-tag">@betabreakhsin</div>
-    <h2 class="wm-h1">Viral Post</h2>
-    <p class="wm-h1 dim">Collection of Cringe Moments</p>
-    <p class="wm-h2">Aim to make you laugh</p>
+    <h2 class="wm-h1" id="wm-h1">Viral Post</h2>
+    <p class="wm-h1 dim" id="wm-h1-dim">Collection of Cringe Moments</p>
+    <p class="wm-h2" id="wm-h2">Aim to make you laugh</p>
     <div class="wm-div"></div>
     <div class="wm-lr">
-      <span class="wm-ll">Language:</span>
+      <span class="wm-ll" id="wm-ll">Language:</span>
       <div class="wm-tg">
         <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
         <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
       </div>
     </div>
-    <button class="wm-cta" onclick="wClose()">Start Exploring &#8594;</button>
-    <label class="wm-ns"><input type="checkbox" id="wm-ns"> Don't show this again</label>
+    <button class="wm-cta" id="wm-cta" onclick="wClose()">Start Exploring &#8594;</button>
+    <label class="wm-ns"><input type="checkbox" id="wm-ns"> <span id="wm-dont-show">Don't show this again</span></label>
   </div>
 </div>
 <div id="pop" class="pop"></div>
@@ -179,7 +179,6 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
       <button id="blk" onclick="sV('likes')"></button>
       <button id="bct" onclick="sV('count')"></button>
     </div>
-    <button id="buo" class="uf-btn" onclick="sU()"></button>
   </div>
 </div>
 <div class="main">
@@ -233,13 +232,8 @@ var CAT_DESC = {
   }
 };
 
-var uOnly = false;
-
 function tD(c){ return (CAT_DESC[lg] && CAT_DESC[lg][c]) || ""; }
-function tUF(){ return lg==="zh" ? "國際通用笑點" : "Universal only"; }
-function tAF(){ return lg==="zh" ? "全部笑點" : "All jokes"; }
 function tCH(){ return lg==="zh" ? "↑ 點擊長條可篩選類別" : "↑ Click a bar to filter by category"; }
-function zhBadge(){ return '<span class="zh-b" title="'+(lg==="zh"?"語言/文化限定，翻譯後效果可能打折":"Humour relies on Chinese language or local culture&#160;—&#160;may not translate")+'">'+(lg==="zh"?"文化梗":"ZH")+'</span>'; }
 
 /* ── Welcome Modal ── */
 var _wlg = "en";
@@ -247,6 +241,15 @@ function wML(l){
   _wlg = l;
   document.getElementById("wlb-en").className = "wm-lb"+(l==="en"?" on":"");
   document.getElementById("wlb-zh").className = "wm-lb"+(l==="zh"?" on":"");
+  var M = (typeof I !== "undefined" && I[l]) ? I[l] : null;
+  if(M){
+    document.getElementById("wm-h1").textContent = M.modal_h1;
+    document.getElementById("wm-h1-dim").textContent = M.modal_h1_dim;
+    document.getElementById("wm-h2").textContent = M.modal_h2;
+    document.getElementById("wm-ll").textContent = M.modal_lang_label;
+    document.getElementById("wm-cta").textContent = M.modal_cta;
+    document.getElementById("wm-dont-show").textContent = M.modal_dont_show;
+  }
 }
 function wClose(){
   if(document.getElementById("wm-ns").checked) localStorage.setItem("wm_s","1");
@@ -256,7 +259,7 @@ function wClose(){
 }
 
 /* ── Category Popover ── */
-var _popSrc = null;
+var _popSrc = null, _popArmedAt = 0;
 function showPop(e){
   e.stopPropagation();
   var btn = e.currentTarget, desc = btn.getAttribute("data-desc");
@@ -270,20 +273,16 @@ function showPop(e){
   if(left + pw > window.innerWidth) left = r.left - pw - 8;
   if(top + 90 > window.innerHeight) top = window.innerHeight - 100;
   pop.style.left = left + "px"; pop.style.top = top + "px";
+  _popArmedAt = performance.now();
   requestAnimationFrame(function(){ pop.classList.add("on"); });
 }
 function hidePop(){ _popSrc=null; var p=document.getElementById("pop"); if(p){ p.classList.remove("on"); setTimeout(function(){ if(!p.classList.contains("on")) p.style.display="none"; }, 110); } }
-document.addEventListener("click", hidePop);
+document.addEventListener("click", function(){
+  if(performance.now() - _popArmedAt < 250) return;
+  hidePop();
+});
 
-/* ── Universal filter ── */
-function sU(){
-  uOnly = !uOnly;
-  var b = document.getElementById("buo");
-  if(b){ b.className = "uf-btn"+(uOnly?" on":""); b.textContent = uOnly ? tUF() : tAF(); }
-  rT();
-}
-
-var lg="zh", vw="likes", af=null, AC=null;
+var lg="en", vw="likes", af=null, AC=null;
 var CC={};
 D.catLabels.forEach(function(c,i){ CC[c]=D.catColors[i]; });
 CC["其他"]="#787878";
@@ -292,7 +291,8 @@ function t(k){ return I[lg][k]; }
 function tC(c){ return (I[lg].cat_labels[c]||c); }
 function tS(s){ return (I[lg].sub_labels[s]||s); }
 
-function esc(s){ return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
+function escH(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
 function bS(){
   var el=document.getElementById("sl"), h="";
@@ -302,7 +302,7 @@ function bS(){
     + '<span class="cc">'+D.total+'</span></div>'
     + '<div class="dv"></div>';
   D.catLabels.slice().sort(function(a,b){ return D.catStats[b].count-D.catStats[a].count; }).forEach(function(mc){
-    var s=D.catStats[mc], ia=(af&&af.c===mc&&!af.s);
+    var s=D.catStats[mc], ia=(af&&af.c===mc);
     var _desc=esc(tD(mc));
     h += '<div class="ci'+(ia?" on":"")+'" data-cat="'+esc(mc)+'">'
       + '<div class="cd" style="background:'+CC[mc]+'"></div>'
@@ -366,7 +366,8 @@ function bC(){
       if(!tot||!m0.data[xi]) return;
       var xPos=m0.data[xi].x;
       var topY=chart.scales.y.getPixelForValue(tot);
-      var pct=totalAll>0?Math.round(tot/totalAll*100)+"%":"";
+      var pctNum=totalAll>0?tot/totalAll*100:0;
+      var pct=totalAll>0?(pctNum>0&&pctNum<0.5?"<1%":Math.round(pctNum)+"%"):"";
       ctx2.save();ctx2.fillStyle="#999";ctx2.font="bold 9px sans-serif";
       ctx2.textAlign="center";ctx2.textBaseline="bottom";
       ctx2.fillText(pct,xPos,topY-2);ctx2.restore();
@@ -399,28 +400,33 @@ function bC(){
 
 function rT(){
   var q=document.getElementById("si").value.toLowerCase().trim();
+  var tokens = q ? q.split(/\s+/).filter(Boolean) : [];
   var tb=document.getElementById("tb"), nr=document.getElementById("nr");
   var rows=D.replies;
   if(af) rows=rows.filter(function(r){ return r.c===af.c&&(!af.s||r.s===af.s); });
-  if(q) rows=rows.filter(function(r){ return r.t.toLowerCase().indexOf(q)>=0||r.a.toLowerCase().indexOf(q)>=0; });
-  if(uOnly) rows=rows.filter(function(r){ return r.i!==false; });
+  if(tokens.length){
+    rows=rows.filter(function(r){
+      var hay = r.t.toLowerCase()+" @"+r.a.toLowerCase();
+      return tokens.every(function(tok){ return hay.indexOf(tok)>=0; });
+    });
+  }
   rows=rows.slice().sort(function(a,b){ return b.l-a.l; });
   if(!rows.length){ tb.innerHTML=""; nr.style.display="block"; return; }
   nr.style.display="none";
+  var aT=t("aria_open_threads"), aG=t("aria_open_translate");
   var f=document.createDocumentFragment();
   rows.forEach(function(r){
     var tr=document.createElement("tr");
     var cl=CC[r.c]||"#888";
     var gu="https://translate.google.com/?sl=zh-TW&tl=en&text="+encodeURIComponent(r.t);
-    var sb=r.s ? ('<span class="sbg">'+tS(r.s)+(r.i===false?zhBadge():'')+"</span>") : "";
-    var zh=(r.i===false && !r.s) ? zhBadge() : '';
-    var sf=r.t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-    var tt=r.t.replace(/"/g,"&quot;").replace(/\n/g," ");
-    var linkHtml=(r.u ? '<a href="'+r.u+'" target="_blank" class="lb">&#128279;</a>' : "")
-                +'<a href="'+gu+'" target="_blank" class="lb">&#127760;</a>';
-    tr.innerHTML='<td class="tl">'+r.ls+'</td>'
-      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+tC(r.c)+'</span>'+sb+zh+'</td>'
-      +'<td class="ta2">@'+r.a+'</td>'
+    var sb=r.s ? ('<span class="sbg">'+escH(tS(r.s))+"</span>") : "";
+    var sf=escH(r.t);
+    var tt=esc(r.t).replace(/\n/g," ");
+    var linkHtml=(r.u ? '<a href="'+esc(r.u)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aT)+'" class="lb">&#128279;</a>' : "")
+                +(lg==="en" ? '<a href="'+esc(gu)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aG)+'" class="lb">&#127760;</a>' : "");
+    tr.innerHTML='<td class="tl">'+escH(r.ls)+'</td>'
+      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+escH(tC(r.c))+'</span>'+sb+'</td>'
+      +'<td class="ta2">@'+escH(r.a)+'</td>'
       +'<td class="tx"><div title="'+tt+'">'+sf+'</div></td>'
       +'<td class="tlk">'+linkHtml+'</td>';
     f.appendChild(tr);
@@ -430,7 +436,9 @@ function rT(){
 
 function sF(cat,sub){
   if(cat==null){ af=null; }
-  else if(sub!=null && sub!==undefined){ af={c:cat,s:sub}; }
+  else if(sub!=null && sub!==undefined){
+    af=(af&&af.c===cat&&af.s===sub) ? null : {c:cat,s:sub};
+  }
   else{ af=(af&&af.c===cat&&!af.s) ? null : {c:cat}; }
   bS(); rT();
 }
@@ -449,12 +457,12 @@ function aI(){
   document.getElementById("fs").textContent=t("source");
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
-  var bu=document.getElementById("buo"); if(bu){ bu.textContent=uOnly?tUF():tAF(); bu.className="uf-btn"+(uOnly?" on":""); }
   var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
 }
 
 function sL(l){
   lg=l;
+  document.documentElement.lang = (l==="zh" ? "zh-TW" : "en");
   document.getElementById("bzh").className=(l==="zh"?"on-l":"");
   document.getElementById("ben").className=(l==="en"?"on-l":"");
   aI(); bS(); bC(); rT();
@@ -471,7 +479,7 @@ function sV(v){
   var sl = localStorage.getItem("wm_l") || "en";
   _wlg = sl; wML(sl);
   if(localStorage.getItem("wm_s")==="1") document.getElementById("wm").style.display="none";
-  sL(sl); bC(); rT();
+  sL(sl); sV(vw);
   function pulse(){ var h=document.getElementById("ch-hint"); if(h){ h.classList.add("glow"); setTimeout(function(){ h.classList.remove("glow"); },700); } }
   setTimeout(pulse, 1800);
   setInterval(pulse, 6000);
