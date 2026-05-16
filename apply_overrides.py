@@ -2,7 +2,8 @@
 """
 1. Applies category-overrides.json to replies.json
 2. Renames legacy categories/subcats to v2 names
-3. Rebuilds chart_data.json from scratch
+3. Applies replies-v3.json intl re-classifications (joined by url)
+4. Rebuilds chart_data.json from scratch
 """
 import json, os
 from collections import defaultdict
@@ -51,14 +52,24 @@ def save(path, data):
 def apply_and_rebuild():
     replies_path    = os.path.join(BASE, "data/replies.json")
     overrides_path  = os.path.join(BASE, "data/category-overrides.json")
+    intl_v3_path    = os.path.join(BASE, "data/replies-v3.json")
     chart_path      = os.path.join(BASE, "data/chart_data.json")
 
     replies_data = load(replies_path)
     overrides    = load(overrides_path)
     chart_data   = load(chart_path)
 
+    # Load intl v3 deltas — keyed by url
+    intl_v3 = {}
+    if os.path.exists(intl_v3_path):
+        v3 = load(intl_v3_path)
+        for entry in v3.get("replies", []):
+            intl_v3[entry["url"]] = bool(entry["intl"])
+        print(f"Loaded {len(intl_v3)} intl v3 deltas")
+
     replies = replies_data["replies"]
     changed = 0
+    intl_flipped = 0
 
     for r in replies:
         url = r["url"]
@@ -70,10 +81,8 @@ def apply_and_rebuild():
             r["category"]    = overrides[url]["category"]
             r["subcategory"] = overrides[url]["subcategory"]
             changed += 1
-            continue
-
         # 2. Rename legacy categories
-        if old_cat in CAT_RENAME:
+        elif old_cat in CAT_RENAME:
             new_cat = CAT_RENAME[old_cat]
             r["category"] = new_cat
             # Promote null subcat to 點餐/購物 for former 點餐/購物口誤 items
@@ -83,7 +92,14 @@ def apply_and_rebuild():
                 r["subcategory"] = SUB_RENAME[old_sub]
             changed += 1
 
-    print(f"Updated {changed} replies")
+        # 3. Apply intl v3 override (joined by url)
+        if url in intl_v3:
+            new_intl = intl_v3[url]
+            if r.get("intl") != new_intl:
+                r["intl"] = new_intl
+                intl_flipped += 1
+
+    print(f"Updated {changed} replies; flipped intl on {intl_flipped} replies")
     save(replies_path, replies_data)
 
     # ── Rebuild chart_data ────────────────────────────────────────────────────
@@ -149,7 +165,7 @@ def apply_and_rebuild():
     # Rebuild compact replies list (keep same key scheme)
     compact_replies = []
     for r in replies:
-        compact_replies.append({
+        row = {
             "a":  r["author"],
             "t":  r["text"],
             "l":  r.get("likesNum", 0),
@@ -157,7 +173,10 @@ def apply_and_rebuild():
             "u":  r["url"],
             "c":  r["category"],
             "s":  r.get("subcategory"),
-        })
+        }
+        if "intl" in r:
+            row["i"] = bool(r["intl"])
+        compact_replies.append(row)
 
     chart_data["catLabels"]  = cat_labels
     chart_data["catColors"]  = cat_colors

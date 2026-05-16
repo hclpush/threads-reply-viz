@@ -48,6 +48,8 @@ i18n = {
         "modal_dont_show": "不要再顯示",
         "aria_open_threads": "在 Threads 開啟原文",
         "aria_open_translate": "用 Google 翻譯開啟",
+        "uf_on": "國際通用笑點",
+        "uf_off": "全部笑點",
         "cat_labels": {
             "口誤": "口誤",
             "被工作/兵役制約": "被工作/兵役制約",
@@ -102,6 +104,8 @@ i18n = {
         "modal_dont_show": "Don't show this again",
         "aria_open_threads": "Open on Threads",
         "aria_open_translate": "Open in Google Translate",
+        "uf_on": "Universal only",
+        "uf_off": "All jokes",
         "cat_labels": {
             "口誤": "Slip of the Tongue",
             "被工作/兵役制約": "Conditioned by Work/Military",

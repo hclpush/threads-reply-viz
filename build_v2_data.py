@@ -92,7 +92,7 @@ def rebuild_chart_data(replies, source_post, overrides):
 
     compact = []
     for r in replies:
-        compact.append({
+        row = {
             "a":  r["author"],
             "t":  r["text"],
             "l":  r.get("likesNum", 0),
@@ -100,7 +100,10 @@ def rebuild_chart_data(replies, source_post, overrides):
             "u":  r["url"],
             "c":  r["category"],
             "s":  r.get("subcategory"),
-        })
+        }
+        if "intl" in r:
+            row["i"] = bool(r["intl"])
+        compact.append(row)
 
     return {
         "sourcePost":  source_post,

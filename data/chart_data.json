@@ -12,16 +12,16 @@
     "叫錯"
   ],
   "catColors": [
-    "#c47878",
-    "#5496c0",
-    "#b89050",
-    "#9e6eaa",
-    "#787878",
-    "#6a7ec8",
-    "#b46080",
-    "#4a9898",
-    "#6a9e52",
-    "#a89040"
+    "#ff6b6b",
+    "#4bcffa",
+    "#ff9f43",
+    "#e84393",
+    "#666666",
+    "#a29bfe",
+    "#c44569",
+    "#34e7e4",
+    "#6ab04c",
+    "#ffd32a"
   ],
   "catStats": {
     "口誤": {
@@ -780,7 +780,7 @@
       "u": "https://www.threads.com/@vittorio.dacunzo/post/DXz8CxPk5S2",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "wuxi167",
@@ -790,7 +790,7 @@
       "u": "https://www.threads.com/@wuxi167/post/DX0i1tok03a",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yolong1102",
@@ -810,7 +810,7 @@
       "u": "https://www.threads.com/@gil9/post/DX3OxpLkVhX",
       "c": "其他",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "tai_blackx",
@@ -860,7 +860,7 @@
       "u": "https://www.threads.com/@joey850605/post/DX09v91k_Pd",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "williamliao085",
@@ -880,7 +880,7 @@
       "u": "https://www.threads.com/@ljijijsu0319/post/DX1tMYhgTel",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "tonythesea",
@@ -950,7 +950,7 @@
       "u": "https://www.threads.com/@yhn11999/post/DX10HPaE1Gw",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "wawawayu.makeup",
@@ -970,7 +970,7 @@
       "u": "https://www.threads.com/@imheidichin/post/DX4pgOGDx0v",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "yihaw1",
@@ -1020,7 +1020,7 @@
       "u": "https://www.threads.com/@89.09.30/post/DX5QeOaj9UG",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "kevin670305",
@@ -1190,7 +1190,7 @@
       "u": "https://www.threads.com/@pjsk_yutsuki_1202/post/DX1cJNDE2Mb",
       "c": "其他",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "jjlooklu",
@@ -1200,7 +1200,7 @@
       "u": "https://www.threads.com/@jjlooklu/post/DX1yXxfFEey",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "bubblegum_1016",
@@ -1270,7 +1270,7 @@
       "u": "https://www.threads.com/@whor.u.u/post/DX1sFq8EzMu",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "winniebear131",
@@ -1280,7 +1280,7 @@
       "u": "https://www.threads.com/@winniebear131/post/DX2Bv0ij5OQ",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "shenojiz",
@@ -1300,7 +1300,7 @@
       "u": "https://www.threads.com/@stacccy_life/post/DX1X1TWGYLY",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "japanmegane",
@@ -1350,7 +1350,7 @@
       "u": "https://www.threads.com/@niuwubo/post/DX185FjEw4Q",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "justalangame",
@@ -1400,7 +1400,7 @@
       "u": "https://www.threads.com/@wang.z.yuan.39/post/DX2n7_kk3Qg",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "minna_3006",
@@ -1460,7 +1460,7 @@
       "u": "https://www.threads.com/@golden_sparkle791/post/DX1N_zcmGpc",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "towza1989",
@@ -1530,7 +1530,7 @@
       "u": "https://www.threads.com/@yihaaann/post/DX0LUVcE2yQ",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "timmybrick",
@@ -1560,7 +1560,7 @@
       "u": "https://www.threads.com/@apo11253915/post/DXzh3sOGXKF",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "ddaphnewg",
@@ -1590,7 +1590,7 @@
       "u": "https://www.threads.com/@77.77.cc/post/DX0KOybkxSS",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "lrc1119",
@@ -1640,7 +1640,7 @@
       "u": "https://www.threads.com/@lll_okawa/post/DX0vE5qE1Ab",
       "c": "當眾出糗",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "0157_2000",
@@ -1700,7 +1700,7 @@
       "u": "https://www.threads.com/@vickey_1001/post/DX1jKJtjxTB",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "gagarubylin",
@@ -1730,7 +1730,7 @@
       "u": "https://www.threads.com/@shaolotte/post/DX1EUE0kUih",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yvonnehsieh467",
@@ -1870,7 +1870,7 @@
       "u": "https://www.threads.com/@coolcoolman7777/post/DX090VmE9-b",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "namaste_moon_33",
@@ -1990,7 +1990,7 @@
       "u": "https://www.threads.com/@little_crab_29/post/DX1FpTvlPJ3",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "hansxie",
@@ -2130,7 +2130,7 @@
       "u": "https://www.threads.com/@changdori/post/DX05chTlDzC",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "changdori",
@@ -2150,7 +2150,7 @@
       "u": "https://www.threads.com/@weeeee_ez/post/DXzl1XHE1Of",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yunh_an0706",
@@ -2210,7 +2210,7 @@
       "u": "https://www.threads.com/@ahqi9807/post/DX2DD0FCTHr",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "zizian940616",
@@ -2220,7 +2220,7 @@
       "u": "https://www.threads.com/@zizian940616/post/DX0uJo8juQe",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "yang_____0330",
@@ -2250,7 +2250,7 @@
       "u": "https://www.threads.com/@jiangmarka/post/DX3M97NEwJF",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "ning800516",
@@ -2300,7 +2300,7 @@
       "u": "https://www.threads.com/@cloudvillage666666/post/DX1a0NYGga8",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "_.yuw039",
@@ -2370,7 +2370,7 @@
       "u": "https://www.threads.com/@borneo.u_u/post/DX1AuJGkaLT",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "comedinebento",
@@ -2380,7 +2380,7 @@
       "u": "https://www.threads.com/@comedinebento/post/DX3lPCsmIOQ",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "sugarhue.tw",
@@ -2400,7 +2400,7 @@
       "u": "https://www.threads.com/@phinas_ann/post/DX1JEjbE8BK",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "mikosmart",
@@ -2470,7 +2470,7 @@
       "u": "https://www.threads.com/@sappho.eureka/post/DX1TKLBkdvE",
       "c": "叫錯",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "he_he0402",
@@ -2590,7 +2590,7 @@
       "u": "https://www.threads.com/@claire.huang.359/post/DX3jQOxk319",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "o33o_520",
@@ -2640,7 +2640,7 @@
       "u": "https://www.threads.com/@pear_6060/post/DX41b2wk-ix",
       "c": "口誤",
       "s": "語言混亂",
-      "i": true
+      "i": false
     },
     {
       "a": "usagi_yan",
@@ -2720,7 +2720,7 @@
       "u": "https://www.threads.com/@jialing_0509/post/DX4PiGkEQLu",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "y._c_.h",
@@ -2760,7 +2760,7 @@
       "u": "https://www.threads.com/@ora0717/post/DX0UBr_EiRx",
       "c": "當眾出糗",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "sb_uwu_bs",
@@ -2770,7 +2770,7 @@
       "u": "https://www.threads.com/@sb_uwu_bs/post/DX2dRyFE3Mf",
       "c": "當眾出糗",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "johnwangcy",
@@ -2820,7 +2820,7 @@
       "u": "https://www.threads.com/@sammi19553/post/DX1DcnyEoV9",
       "c": "其他",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "gino.bloodshield",
@@ -2830,7 +2830,7 @@
       "u": "https://www.threads.com/@gino.bloodshield/post/DX1EASrCaiQ",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "jjerry1997",
@@ -2950,7 +2950,7 @@
       "u": "https://www.threads.com/@kris.hsiao.7/post/DX5EI5ok0fY",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "shanfon.hsu",
@@ -3030,7 +3030,7 @@
       "u": "https://www.threads.com/@winshian/post/DX1pNA3kUVT",
       "c": "其他",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "yuip.ong",
@@ -3150,7 +3150,7 @@
       "u": "https://www.threads.com/@slycsboy/post/DX1-LoKE7wI",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "gao.xiaohei",
@@ -3200,7 +3200,7 @@
       "u": "https://www.threads.com/@terrrrrriri/post/DX08yXSEtwH",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "eastgonechiang",
@@ -3230,7 +3230,7 @@
       "u": "https://www.threads.com/@pun_/post/DX3JwLSCWaJ",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "ratatoskleon",
@@ -3250,7 +3250,7 @@
       "u": "https://www.threads.com/@comedinebento/post/DX3la0hGOU9",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "nen2roastpork",
@@ -3330,7 +3330,7 @@
       "u": "https://www.threads.com/@tsaikuan/post/DX136WeExTK",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "linwei0508",
@@ -3410,7 +3410,7 @@
       "u": "https://www.threads.com/@chia_yu/post/DX1LH3KEdYn",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "chia_yu",
@@ -3630,7 +3630,7 @@
       "u": "https://www.threads.com/@catbutler.tw/post/DX1LaSwER3v",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "catbutler.tw",
@@ -3640,7 +3640,7 @@
       "u": "https://www.threads.com/@catbutler.tw/post/DX1uzStEQVD",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "_7_______9_",
@@ -3870,7 +3870,7 @@
       "u": "https://www.threads.com/@hameii.chu/post/DX0ZQ8oEvDQ",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yd_sam1006",
@@ -4010,7 +4010,7 @@
       "u": "https://www.threads.com/@jislove0011/post/DX1D03Kk4Th",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "vccv1015",
@@ -4630,7 +4630,7 @@
       "u": "https://www.threads.com/@toffeeszz/post/DX3VWqPDjGk",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "eddie870206",
@@ -4640,7 +4640,7 @@
       "u": "https://www.threads.com/@eddie870206/post/DX0HTafEoOB",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "abc3504421",
@@ -4660,7 +4660,7 @@
       "u": "https://www.threads.com/@secret0513/post/DX0W5RtiQo3",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "austin_chen0115",
@@ -4670,7 +4670,7 @@
       "u": "https://www.threads.com/@austin_chen0115/post/DX1nE4LiXT5",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "lena.tsai_051",
@@ -4970,7 +4970,7 @@
       "u": "https://www.threads.com/@s_i_l_0817/post/DX2Kgq6kwdg",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "lescherry710815",
@@ -4980,7 +4980,7 @@
       "u": "https://www.threads.com/@lescherry710815/post/DX0-66-ERfZ",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "jipmeme",
@@ -5010,7 +5010,7 @@
       "u": "https://www.threads.com/@louiesuu/post/DX183juGecc",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "someone_finding_you",
@@ -5050,7 +5050,7 @@
       "u": "https://www.threads.com/@api810209/post/DX02qu2CaRN",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "unilions6566",
@@ -5070,7 +5070,7 @@
       "u": "https://www.threads.com/@ziyu_0806/post/DX2Kt9LDz-z",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "marcella.biscuiterie",
@@ -5160,7 +5160,7 @@
       "u": "https://www.threads.com/@ee_0816/post/DX2A0zXAZbz",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "hurricane_116",
@@ -5340,7 +5340,7 @@
       "u": "https://www.threads.com/@mothra_1961/post/DX0rD-MGVnI",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "speed19881211",
@@ -5370,7 +5370,7 @@
       "u": "https://www.threads.com/@siyu3876/post/DXzovnWk9P9",
       "c": "以為沒人亂講話",
       "s": null,
-      "i": true
+      "i": false
     },
     {
       "a": "clliud",
@@ -5540,7 +5540,7 @@
       "u": "https://www.threads.com/@heloise0301/post/DX0mJPDkTgm",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "bbddy._.04",
@@ -5580,7 +5580,7 @@
       "u": "https://www.threads.com/@skinnys_not_skinny/post/DX1y0yQE4f6",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "h.huangpeipei",
@@ -5660,7 +5660,7 @@
       "u": "https://www.threads.com/@sangpeijung0502/post/DX0BotfExaY",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "parenting.connecting",
@@ -5870,7 +5870,7 @@
       "u": "https://www.threads.com/@the_fungo/post/DX0urSgiRq8",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "account_lapsed_",
@@ -5930,7 +5930,7 @@
       "u": "https://www.threads.com/@yhwvivian/post/DX3h6vClOLj",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yhwvivian",
@@ -6150,7 +6150,7 @@
       "u": "https://www.threads.com/@hankw_uu/post/DX0PZAxD979",
       "c": "口誤",
       "s": "職場口誤",
-      "i": true
+      "i": false
     },
     {
       "a": "xyzec.tol9",
@@ -6160,7 +6160,7 @@
       "u": "https://www.threads.com/@xyzec.tol9/post/DX4FKWICS5V",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "itsme_yuan0318",
@@ -6200,7 +6200,7 @@
       "u": "https://www.threads.com/@hi_____eeeee/post/DXzsJ-igU_q",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "wu_shawn_wu",
@@ -6220,7 +6220,7 @@
       "u": "https://www.threads.com/@samsam_chung/post/DX0gJLRmLaV",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "yc_03.22",
@@ -6480,7 +6480,7 @@
       "u": "https://www.threads.com/@jerrykuo1224/post/DX1iGWjE4b0",
       "c": "口誤",
       "s": "腦袋當機",
-      "i": true
+      "i": false
     },
     {
       "a": "crazydiamond9786",
@@ -6550,7 +6550,7 @@
       "u": "https://www.threads.com/@yi__0128/post/DX4RHPPE_Eh",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "n_ys_m",
@@ -6670,7 +6670,7 @@
       "u": "https://www.threads.com/@richchen518/post/DX0Nv6ek5mz",
       "c": "被工作/兵役制約",
       "s": "一起說歡迎光臨",
-      "i": true
+      "i": false
     },
     {
       "a": "cheen_hwang",
@@ -6740,7 +6740,7 @@
       "u": "https://www.threads.com/@xin12421.7_/post/DX01HJBkddu",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "1130._.hh",
@@ -6790,7 +6790,7 @@
       "u": "https://www.threads.com/@littlemcgee_/post/DX00q_qmEd8",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "coldmeteor.akan",
@@ -7160,7 +7160,7 @@
       "u": "https://www.threads.com/@dodorisyu_/post/DX0v9mFE-Wr",
       "c": "口誤",
       "s": "點餐/購物",
-      "i": true
+      "i": false
     },
     {
       "a": "cat.hua.519",
@@ -7490,7 +7490,7 @@
       "u": "https://www.threads.com/@adosi_howtodo/post/DX0-Q3yj_Bl",
       "c": "口誤",
       "s": "語言混亂",
-      "i": true
+      "i": false
     },
     {
       "a": "foolman8291",
