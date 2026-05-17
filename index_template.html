@@ -107,10 +107,67 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:#555}
 
-@media(max-width:700px){.main{flex-direction:column;height:auto;overflow:auto}.sb{width:100%;border-right:none;border-bottom:1px solid var(--br)}.cw{height:130px}.tc,.ta2{display:none}}
+@media(max-width:700px){.main{flex-direction:column;height:auto;overflow:auto}.sb{width:100%;max-height:240px;overflow-y:auto;border-right:none;border-bottom:1px solid var(--br)}.cw{height:130px}#c2,#c3,.tc,.ta2{display:none}}
+
+/* ── Welcome Modal ── */
+.wm-ov{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.wm-card{background:#141414;border:1px solid #252525;border-radius:22px;padding:40px 44px 34px;max-width:450px;width:100%;text-align:center;box-shadow:0 32px 96px rgba(0,0,0,.85)}
+.wm-pip{width:32px;height:3px;background:#222;border-radius:2px;margin:0 auto 28px}
+.wm-tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+.wm-h1{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1.25;margin-bottom:3px}
+.wm-h1.dim{color:#666;margin-bottom:20px}
+.wm-h2{font-size:13px;font-weight:400;color:#555;line-height:1.5;margin-bottom:22px}
+.wm-div{height:1px;background:#1d1d1d;margin:0 0 22px}
+.wm-lr{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px}
+.wm-ll{font-size:12px;color:#3e3e3e}
+.wm-tg{display:flex;background:#1a1a1a;border:1px solid #222;border-radius:20px;padding:2px}
+.wm-lb{padding:5px 18px;font-size:12px;font-weight:600;cursor:pointer;color:#3e3e3e;border:none;background:transparent;border-radius:16px;transition:all 140ms ease;font-family:var(--fn)}
+.wm-lb.on{background:#fff;color:#000}
+.wm-cta{width:100%;padding:13px;background:var(--ac);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--fn);letter-spacing:.03em;transition:opacity 140ms;margin-bottom:16px}
+.wm-cta:hover{opacity:.82}
+.wm-ns{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;color:#666;cursor:pointer;user-select:none}
+.wm-ns input{accent-color:#666;cursor:pointer}
+
+/* ── Category Popover ── */
+.qi{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;font-size:9px;line-height:1;color:#2c2c2c;cursor:pointer;flex-shrink:0;border:none;background:transparent;transition:color 120ms;font-family:var(--fn);padding:0}
+.qi:hover{color:#777}
+.pop{position:fixed;z-index:500;background:#1e1e1e;border:1px solid #2d2d2d;border-radius:10px;padding:11px 14px;font-size:11.5px;line-height:1.6;color:#888;max-width:215px;box-shadow:0 10px 36px rgba(0,0,0,.75);pointer-events:none;opacity:0;transition:opacity 100ms ease;white-space:normal;display:none}
+.pop.on{opacity:1;display:block}
+
+/* ── ZH badge (language/culture-specific jokes) ── */
+.zh-b{display:inline-flex;align-items:center;font-size:9px;font-weight:700;letter-spacing:.04em;color:#8a6a00;background:#2a2000;border:1px solid #3d3000;border-radius:4px;padding:1px 5px;margin-left:4px;flex-shrink:0;cursor:default;vertical-align:middle}
+.sbg .zh-b{margin-left:3px}
+
+/* ── Universal filter button ── */
+.uf-btn{padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;color:var(--mu);border:1px solid var(--br);background:var(--bg3);border-radius:20px;font-family:var(--fn);transition:all 140ms ease;white-space:nowrap}
+.uf-btn.on{background:var(--ac);border-color:var(--ac);color:#fff}
+
+/* ── Chart hint ── */
+.ch-hint{font-size:11px;color:#888;text-align:center;padding:5px 0 0;letter-spacing:.03em;transition:color 300ms}
+.ch-hint.glow{color:#ccc}
 </style>
 </head>
 <body>
+<div id="wm" class="wm-ov">
+  <div class="wm-card">
+    <div class="wm-pip"></div>
+    <div class="wm-tag">@betabreakhsin</div>
+    <h2 class="wm-h1" id="wm-h1">Viral Post</h2>
+    <p class="wm-h1 dim" id="wm-h1-dim">Collection of Cringe Moments</p>
+    <p class="wm-h2" id="wm-h2">Aim to make you laugh</p>
+    <div class="wm-div"></div>
+    <div class="wm-lr">
+      <span class="wm-ll" id="wm-ll">Language:</span>
+      <div class="wm-tg">
+        <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
+        <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
+      </div>
+    </div>
+    <button class="wm-cta" id="wm-cta" onclick="wClose()">Start Exploring &#8594;</button>
+    <label class="wm-ns"><input type="checkbox" id="wm-ns"> <span id="wm-dont-show">Don't show this again</span></label>
+  </div>
+</div>
+<div id="pop" class="pop"></div>
 <div class="hd">
   <div><h1 id="ht"></h1><p id="hs"></p></div>
   <div class="hr">
@@ -122,12 +179,13 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
       <button id="blk" onclick="sV('likes')"></button>
       <button id="bct" onclick="sV('count')"></button>
     </div>
+    <button id="buo" class="uf-btn" onclick="sU()"></button>
   </div>
 </div>
 <div class="main">
   <div class="sb"><h3 id="sb_title">&#39006;&#21029;</h3><div id="sl"></div></div>
   <div class="ct">
-    <div class="ca"><div class="cw"><canvas id="ch"></canvas></div></div>
+    <div class="ca"><div class="cw"><canvas id="ch"></canvas></div><p class="ch-hint" id="ch-hint">&#8593; Click a bar to filter by category</p></div>
     <div class="ta">
       <div class="sr"><input id="si" type="text" placeholder="..." oninput="rT()"></div>
       <div class="ts">
@@ -147,29 +205,150 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 <script>
 var D = JSON.parse(decodeURIComponent(escape(atob("__DATA_B64__"))));
 var I = __I18N__;
-var lg="zh", vw="likes", af=null, AC=null;
+
+var CAT_DESC = {
+  "zh": {
+    "口誤": "不小心說錯話，常發生在點餐、工作或日常對話中突然腦當機。",
+    "被工作/兵役制約": "工作或當兵的習慣滲入日常，在奇怪時機做出職業反應。（台灣限定：男性義務兵役）",
+    "認錯人": "誤以為認識某人，結果對著陌生人揮手、擁抱或打招呼。",
+    "當眾出糗": "在眾人面前發生的尷尬瞬間，全場都是見證者。",
+    "其他": "不屬於任何特定分類的其他窘境。",
+    "回覆原 PO": "留言者對原始貼文的反應，不是具體的窘境故事。",
+    "以為在跟自己說話": "誤以為有人在叫你，結果白白答應；或被叫到卻以為不是叫你。",
+    "走錯空間": "走進錯誤的房間、廁所、店家或電梯。",
+    "以為沒人亂講話": "以為沒人在場就亂說話，結果被抓個正著。",
+    "叫錯": "叫錯對方的稱謂，最經典的是叫老師「媽媽」。"
+  },
+  "en": {
+    "口誤": "You accidentally said the wrong word — usually while ordering food, at work, or mid-conversation when your brain short-circuited.",
+    "被工作/兵役制約": "Your job or military service trained your brain so hard the habit leaked into everyday life. Note: Taiwan has mandatory military service for men — some jokes require that context.",
+    "認錯人": "You waved at, hugged, or greeted a complete stranger thinking you recognized them.",
+    "當眾出糗": "An embarrassing moment that happened in front of an audience — with witnesses.",
+    "其他": "Everything else that doesn't fit neatly into the other categories.",
+    "回覆原 PO": "Replies reacting to the original post — appreciation, jokes, or pure vibes. Not a specific cringe story.",
+    "以為在跟自己說話": "You answered someone who wasn't talking to you, or ignored someone who was calling your name.",
+    "走錯空間": "You walked into the wrong room, bathroom, store, or elevator.",
+    "以為沒人亂講話": "You said something you shouldn't have, thinking no one was around — but someone was.",
+    "叫錯": "You called someone by the wrong name. The classic: calling your teacher 'Mom'."
+  }
+};
+
+var uOnly = false;
+
+function tD(c){ return (CAT_DESC[lg] && CAT_DESC[lg][c]) || ""; }
+function tCH(){ return lg==="zh" ? "↑ 點擊長條可篩選類別" : "↑ Click a bar to filter by category"; }
+function tUF(){ return I[lg].uf_on; }
+function tAF(){ return I[lg].uf_off; }
+
+/* ── Welcome Modal ── */
+var _wlg = "en";
+function wML(l){
+  _wlg = l;
+  document.getElementById("wlb-en").className = "wm-lb"+(l==="en"?" on":"");
+  document.getElementById("wlb-zh").className = "wm-lb"+(l==="zh"?" on":"");
+  var M = (typeof I !== "undefined" && I[l]) ? I[l] : null;
+  if(M){
+    document.getElementById("wm-h1").textContent = M.modal_h1;
+    document.getElementById("wm-h1-dim").textContent = M.modal_h1_dim;
+    document.getElementById("wm-h2").textContent = M.modal_h2;
+    document.getElementById("wm-ll").textContent = M.modal_lang_label;
+    document.getElementById("wm-cta").textContent = M.modal_cta;
+    document.getElementById("wm-dont-show").textContent = M.modal_dont_show;
+  }
+}
+function wClose(){
+  if(document.getElementById("wm-ns").checked) localStorage.setItem("wm_s","1");
+  localStorage.setItem("wm_l", _wlg);
+  document.getElementById("wm").style.display="none";
+  sL(_wlg);
+}
+
+/* ── Category Popover ── */
+var _popSrc = null, _popArmedAt = 0;
+function showPop(e){
+  e.stopPropagation();
+  var btn = e.currentTarget, desc = btn.getAttribute("data-desc");
+  var pop = document.getElementById("pop");
+  if(_popSrc === desc){ hidePop(); return; }
+  _popSrc = desc;
+  pop.textContent = desc;
+  pop.style.display = "block";
+  var r = btn.getBoundingClientRect(), pw = 220;
+  var left = r.right + 8, top = r.top;
+  if(left + pw > window.innerWidth) left = r.left - pw - 8;
+  if(top + 90 > window.innerHeight) top = window.innerHeight - 100;
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+  _popArmedAt = performance.now();
+  requestAnimationFrame(function(){ pop.classList.add("on"); });
+}
+function hidePop(){ _popSrc=null; var p=document.getElementById("pop"); if(p){ p.classList.remove("on"); setTimeout(function(){ if(!p.classList.contains("on")) p.style.display="none"; }, 110); } }
+document.addEventListener("click", function(){
+  if(performance.now() - _popArmedAt < 250) return;
+  hidePop();
+});
+
+function sU(){
+  uOnly = !uOnly;
+  var b = document.getElementById("buo");
+  if(b){ b.className = "uf-btn"+(uOnly?" on":""); b.textContent = uOnly ? tUF() : tAF(); }
+  // Clear stale active category filter if the current selection no longer has rows
+  if(af){
+    var V = vData();
+    if(!V.stats[af.c] || (af.s && !(V.stats[af.c].subcategories||{})[af.s])){
+      af = null;
+    }
+  }
+  bS(); bC(); rT();
+}
+
+var lg="en", vw="likes", af=null, AC=null;
 var CC={};
 D.catLabels.forEach(function(c,i){ CC[c]=D.catColors[i]; });
 CC["其他"]="#787878";
+
+// Live view: recomputes catStats from filtered rows so chart + sidebar
+// reflect the universal-only toggle, not just the table.
+function vData(){
+  var rows = uOnly ? D.replies.filter(function(r){ return r.i===true; }) : D.replies;
+  var stats = {};
+  rows.forEach(function(r){
+    var c = r.c;
+    if(!stats[c]) stats[c] = {count:0, totalLikes:0, subcategories:{}};
+    stats[c].count++;
+    stats[c].totalLikes += (r.l||0);
+    if(r.s){
+      var sb = stats[c].subcategories;
+      if(!sb[r.s]) sb[r.s] = {count:0, totalLikes:0};
+      sb[r.s].count++;
+      sb[r.s].totalLikes += (r.l||0);
+    }
+  });
+  var labels = D.catLabels.filter(function(c){ return stats[c]; });
+  return {labels: labels, stats: stats, total: rows.length};
+}
 
 function t(k){ return I[lg][k]; }
 function tC(c){ return (I[lg].cat_labels[c]||c); }
 function tS(s){ return (I[lg].sub_labels[s]||s); }
 
-function esc(s){ return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
+function escH(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
 function bS(){
+  var V=vData();
   var el=document.getElementById("sl"), h="";
   h += '<div class="ci'+(af?"":" on")+'" data-cat="">'
     + '<div class="cd" style="background:#555"></div>'
     + '<span class="cn">'+t("all_categories")+'</span>'
-    + '<span class="cc">'+D.total+'</span></div>'
+    + '<span class="cc">'+V.total+'</span></div>'
     + '<div class="dv"></div>';
-  D.catLabels.slice().sort(function(a,b){ return D.catStats[b].count-D.catStats[a].count; }).forEach(function(mc){
-    var s=D.catStats[mc], ia=(af&&af.c===mc&&!af.s);
+  V.labels.slice().sort(function(a,b){ return V.stats[b].count-V.stats[a].count; }).forEach(function(mc){
+    var s=V.stats[mc], ia=(af&&af.c===mc);
+    var _desc=esc(tD(mc));
     h += '<div class="ci'+(ia?" on":"")+'" data-cat="'+esc(mc)+'">'
       + '<div class="cd" style="background:'+CC[mc]+'"></div>'
       + '<span class="cn">'+tC(mc)+'</span>'
+      + (_desc?'<button class="qi" data-desc="'+_desc+'" onclick="showPop(event)">ⓘ</button>':'')
       + '<span class="cc">'+s.count+'</span></div>';
     Object.entries(s.subcategories||{})
       .sort(function(a,b){ return b[1].totalLikes-a[1].totalLikes; })
@@ -195,14 +374,15 @@ document.getElementById("sl").addEventListener("click", function(e){
 function bC(){
   var ctx=document.getElementById("ch").getContext("2d");
   if(AC) AC.destroy();
+  var V=vData();
   // sort categories by current view on every render
-  var sl=D.catLabels.slice().sort(function(a,b){
-    return (vw==="likes"?D.catStats[b].totalLikes:D.catStats[b].count)
-          -(vw==="likes"?D.catStats[a].totalLikes:D.catStats[a].count);
+  var sl=V.labels.slice().sort(function(a,b){
+    return (vw==="likes"?V.stats[b].totalLikes:V.stats[b].count)
+          -(vw==="likes"?V.stats[a].totalLikes:V.stats[a].count);
   });
   var lb=sl.map(tC), ds=[];
   sl.forEach(function(mc,mi){
-    var s=D.catStats[mc], sbs=s.subcategories||{};
+    var s=V.stats[mc], sbs=s.subcategories||{};
     var st=Object.values(sbs).reduce(function(t,ss){
       return t+(vw==="likes"?ss.totalLikes:ss.count);
     },0);
@@ -219,16 +399,17 @@ function bC(){
         ds.push({label:tS(sc),stack:"s",data:a2,backgroundColor:bc+sa,borderColor:"transparent",borderRadius:2});
       });
   });
-  var totalAll=sl.reduce(function(sum,mc){return sum+(vw==="likes"?D.catStats[mc].totalLikes:D.catStats[mc].count);},0);
+  var totalAll=sl.reduce(function(sum,mc){return sum+(vw==="likes"?V.stats[mc].totalLikes:V.stats[mc].count);},0);
   var pctPlugin={id:"pct",afterDraw:function(chart){
     var ctx2=chart.ctx;
     var m0=chart.getDatasetMeta(0);
     sl.forEach(function(mc,xi){
-      var tot=vw==="likes"?D.catStats[mc].totalLikes:D.catStats[mc].count;
+      var tot=vw==="likes"?V.stats[mc].totalLikes:V.stats[mc].count;
       if(!tot||!m0.data[xi]) return;
       var xPos=m0.data[xi].x;
       var topY=chart.scales.y.getPixelForValue(tot);
-      var pct=totalAll>0?Math.round(tot/totalAll*100)+"%":"";
+      var pctNum=totalAll>0?tot/totalAll*100:0;
+      var pct=totalAll>0?(pctNum>0&&pctNum<0.5?"<1%":Math.round(pctNum)+"%"):"";
       ctx2.save();ctx2.fillStyle="#999";ctx2.font="bold 9px sans-serif";
       ctx2.textAlign="center";ctx2.textBaseline="bottom";
       ctx2.fillText(pct,xPos,topY-2);ctx2.restore();
@@ -261,26 +442,34 @@ function bC(){
 
 function rT(){
   var q=document.getElementById("si").value.toLowerCase().trim();
+  var tokens = q ? q.split(/\s+/).filter(Boolean) : [];
   var tb=document.getElementById("tb"), nr=document.getElementById("nr");
   var rows=D.replies;
   if(af) rows=rows.filter(function(r){ return r.c===af.c&&(!af.s||r.s===af.s); });
-  if(q) rows=rows.filter(function(r){ return r.t.toLowerCase().indexOf(q)>=0||r.a.toLowerCase().indexOf(q)>=0; });
+  if(tokens.length){
+    rows=rows.filter(function(r){
+      var hay = r.t.toLowerCase()+" @"+r.a.toLowerCase();
+      return tokens.every(function(tok){ return hay.indexOf(tok)>=0; });
+    });
+  }
+  if(uOnly) rows=rows.filter(function(r){ return r.i===true; });
   rows=rows.slice().sort(function(a,b){ return b.l-a.l; });
   if(!rows.length){ tb.innerHTML=""; nr.style.display="block"; return; }
   nr.style.display="none";
+  var aT=t("aria_open_threads"), aG=t("aria_open_translate");
   var f=document.createDocumentFragment();
   rows.forEach(function(r){
     var tr=document.createElement("tr");
     var cl=CC[r.c]||"#888";
     var gu="https://translate.google.com/?sl=zh-TW&tl=en&text="+encodeURIComponent(r.t);
-    var sb=r.s ? ('<span class="sbg">'+tS(r.s)+"</span>") : "";
-    var sf=r.t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-    var tt=r.t.replace(/"/g,"&quot;").replace(/\n/g," ");
-    var linkHtml=(r.u ? '<a href="'+r.u+'" target="_blank" class="lb">&#128279;</a>' : "")
-                +'<a href="'+gu+'" target="_blank" class="lb">&#127760;</a>';
-    tr.innerHTML='<td class="tl">'+r.ls+'</td>'
-      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+tC(r.c)+'</span>'+sb+'</td>'
-      +'<td class="ta2">@'+r.a+'</td>'
+    var sb=r.s ? ('<span class="sbg">'+escH(tS(r.s))+"</span>") : "";
+    var sf=escH(r.t);
+    var tt=esc(r.t).replace(/\n/g," ");
+    var linkHtml=(r.u ? '<a href="'+esc(r.u)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aT)+'" class="lb">&#128279;</a>' : "")
+                +(lg==="en" ? '<a href="'+esc(gu)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aG)+'" class="lb">&#127760;</a>' : "");
+    tr.innerHTML='<td class="tl">'+escH(r.ls)+'</td>'
+      +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+escH(tC(r.c))+'</span>'+sb+'</td>'
+      +'<td class="ta2">@'+escH(r.a)+'</td>'
       +'<td class="tx"><div title="'+tt+'">'+sf+'</div></td>'
       +'<td class="tlk">'+linkHtml+'</td>';
     f.appendChild(tr);
@@ -290,7 +479,9 @@ function rT(){
 
 function sF(cat,sub){
   if(cat==null){ af=null; }
-  else if(sub!=null && sub!==undefined){ af={c:cat,s:sub}; }
+  else if(sub!=null && sub!==undefined){
+    af=(af&&af.c===cat&&af.s===sub) ? null : {c:cat,s:sub};
+  }
   else{ af=(af&&af.c===cat&&!af.s) ? null : {c:cat}; }
   bS(); rT();
 }
@@ -309,10 +500,13 @@ function aI(){
   document.getElementById("fs").textContent=t("source");
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
+  var bu=document.getElementById("buo"); if(bu){ bu.textContent=uOnly?tUF():tAF(); bu.className="uf-btn"+(uOnly?" on":""); }
+  var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
 }
 
 function sL(l){
   lg=l;
+  document.documentElement.lang = (l==="zh" ? "zh-TW" : "en");
   document.getElementById("bzh").className=(l==="zh"?"on-l":"");
   document.getElementById("ben").className=(l==="en"?"on-l":"");
   aI(); bS(); bC(); rT();
@@ -325,7 +519,15 @@ function sV(v){
   aI(); bC();
 }
 
-sL("zh"); bC(); rT();
+(function(){
+  var sl = localStorage.getItem("wm_l") || "en";
+  _wlg = sl; wML(sl);
+  if(localStorage.getItem("wm_s")==="1") document.getElementById("wm").style.display="none";
+  sL(sl); sV(vw);
+  function pulse(){ var h=document.getElementById("ch-hint"); if(h){ h.classList.add("glow"); setTimeout(function(){ h.classList.remove("glow"); },700); } }
+  setTimeout(pulse, 1800);
+  setInterval(pulse, 6000);
+})();
 </script>
 </body>
 </html>
