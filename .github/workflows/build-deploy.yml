@@ -33,8 +33,8 @@ jobs:
               html = f.read()
           assert len(html) > 100_000, f"index.html too small: {len(html)} bytes"
 
-          # bilingual strings present
-          for token in ["口誤", "Slip of the Tongue", "chart_data", "CAT_COLORS"]:
+          # bilingual strings present (JS is minified — check data strings, not var names)
+          for token in ["口誤", "Slip of the Tongue", "betabreakhsin", "chart.js"]:
               assert token in html, f"Missing expected token: {token}"
 
           # data files are valid JSON with expected reply count
