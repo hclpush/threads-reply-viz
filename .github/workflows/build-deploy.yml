@@ -39,11 +39,12 @@ jobs:
 
           # data files are valid JSON with expected reply count
           with open("data-v2/replies.json", "r", encoding="utf-8") as f:
-              replies = json.load(f)
-          assert len(replies) >= 1155, f"Reply count dropped: {len(replies)}"
+              data = json.load(f)
+          reply_count = len(data["replies"])
+          assert reply_count >= 1155, f"Reply count dropped: {reply_count}"
 
           print(f"✓ index.html: {len(html):,} bytes")
-          print(f"✓ replies: {len(replies):,}")
+          print(f"✓ replies: {reply_count:,}")
           EOF
 
       - name: Commit updated index.html
