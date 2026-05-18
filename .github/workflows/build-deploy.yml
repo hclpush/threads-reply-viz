@@ -1,0 +1,55 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build dashboard
+        run: python3 build.py --data-dir data-v2
+
+      - name: Sanity check
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+
+          # index.html was generated and is large enough
+          with open("index.html", "r", encoding="utf-8") as f:
+              html = f.read()
+          assert len(html) > 100_000, f"index.html too small: {len(html)} bytes"
+
+          # bilingual strings present
+          for token in ["口誤", "Slip of the Tongue", "chart_data", "CAT_COLORS"]:
+              assert token in html, f"Missing expected token: {token}"
+
+          # data files are valid JSON with expected reply count
+          with open("data-v2/replies.json", "r", encoding="utf-8") as f:
+              replies = json.load(f)
+          assert len(replies) >= 1155, f"Reply count dropped: {len(replies)}"
+
+          print(f"✓ index.html: {len(html):,} bytes")
+          print(f"✓ replies: {len(replies):,}")
+          EOF
+
+      - name: Commit updated index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "chore: rebuild dashboard [skip ci]"
+          git push
