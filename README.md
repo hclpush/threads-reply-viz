@@ -34,78 +34,82 @@ Open `index.html` in any modern browser — no server needed, fully self-contain
 
 ## Data snapshots
 
-| Version | Replies | Scraped | Notes |
+| Snapshot | Replies | Scraped | Notes |
 |---|---|---|---|
-| v1 | 683 | 2026-05-03 | Top-engagement replies only; likes reflect that moment |
-| v2 | 1,155 | 2026-05-15 | Added 472 new replies; refreshed like counts for 250 existing replies |
+| original | 683 | 2026-05-03 | Top-engagement replies only; preserved in `archive/v1-2026-05-03/` |
+| current | 1,155 | 2026-05-15 | Live dataset in `data/`; added 472 new replies, refreshed like counts for 250 existing |
 
 ## File structure
 
 ```
-data/                         # v1 — original snapshot (do not modify)
-  replies.json                  # 683 replies, full fields
-  chart_data.json               # compact format for dashboard
-  category-map.json             # taxonomy reference
-  category-overrides.json       # URL → {category, subcategory} manual overrides
+data/                            # live, current dataset
+  replies.json                     # 1,155 replies, full fields
+  chart_data.json                  # compact format for dashboard
+  category-map.json                # taxonomy reference
+  category-overrides.json          # URL → {category, subcategory} manual overrides
+  staging/                         # in-flight batches (gitignored)
+    raw-scraped.json                 # latest scrape output, unclassified
+    classified-batch.json            # latest batch after classification, pre-merge
+  .backup/                         # snapshot before each merge.py run (gitignored)
 
-data-v2/                      # v2 — current dataset
-  replies.json                  # 1,155 replies (v1 + new), merged
-  chart_data.json               # compact format for dashboard
-  category-map.json             # taxonomy reference (copy of v1)
-  category-overrides.json       # overrides (copy of v1; extend here for new replies)
+pipeline/                        # ordered pipeline scripts
+  scrape.js                        # 1. Playwright scraper → staging/raw-scraped.json
+  classify.py                      # 2. keyword classifier → staging/classified-batch.json
+  overrides.py                     # (optional) regenerate data/category-overrides.json
+  merge.py                         # 3. merge batch into data/, rebuild chart_data.json
+  build.py                         # 4. bake chart_data.json + i18n → index.html
+  package.json                     # Playwright dependency for scrape.js
 
-scripts/
-  scrape_new_replies.js         # Playwright scraper — intercepts GraphQL to extract replies + likes
-  package.json                  # playwright dependency
+archive/                         # frozen historical snapshots
+  v1-2026-05-03/                   # original 683-reply snapshot + v1→v2 migration tooling
 
-generate_overrides.py           # hardcoded OVERRIDES dict → data/category-overrides.json
-apply_overrides.py              # applies overrides to replies.json, rebuilds chart_data.json
-classify_new_replies.py         # keyword classifier for newly scraped replies
-build_v2_data.py                # merges v1 + new replies, updates likes, rebuilds data-v2/
-build.py                        # bakes chart_data.json + i18n into index.html
+index.html                       # built artifact (committed; CI rebuilds on push)
+index_template.html              # source template for build.py
 ```
 
-## Updating with new replies (v3+)
+## Updating with new replies
 
 ```bash
 # 1. Scrape — requires Playwright Chromium and active Threads login in browser profile
-node scripts/scrape_new_replies.js
-# → writes data-v2/raw-scraped.json
+node pipeline/scrape.js
+# → writes data/staging/raw-scraped.json
 
-# 2. Classify new replies
-python3 classify_new_replies.py
-# → writes data-v2/classified-new-replies.json
+# 2. Classify the batch
+python3 pipeline/classify.py
+# → writes data/staging/classified-batch.json
 # → prints 其他 samples for manual review
 
 # 3. (Optional) add URL-based overrides for misclassified items
-#    Edit generate_overrides.py → add to OVERRIDES dict
-#    python3 generate_overrides.py  (writes data/category-overrides.json)
+#    Edit pipeline/overrides.py → add to OVERRIDES dict
+#    python3 pipeline/overrides.py  (writes data/category-overrides.json)
 
-# 4. Merge + rebuild chart data
-python3 build_v2_data.py
-# → writes data-v2/replies.json, data-v2/chart_data.json
+# 4. Merge batch into live dataset (auto-snapshots data/replies.json → data/.backup/ first)
+python3 pipeline/merge.py
+# → writes data/replies.json, data/chart_data.json
 
 # 5. Rebuild dashboard
-python3 build.py --data-dir data-v2
+python3 pipeline/build.py
 # → overwrites index.html
 ```
 
+CI runs step 5 automatically on every push to `main`.
+
 ## Reclassifying replies (manual overrides)
 
-1. **Edit `generate_overrides.py`** — add entries to `OVERRIDES` dict:
+1. **Edit `pipeline/overrides.py`** — add entries to `OVERRIDES` dict:
    `"https://www.threads.com/@user/post/ID": ("category", "subcategory|None")`
-2. `python3 generate_overrides.py` → overwrites `data/category-overrides.json`
-3. `python3 build_v2_data.py` → picks up the updated overrides and rebuilds `data-v2/`
-4. `python3 build.py --data-dir data-v2` → regenerates `index.html`
+2. `python3 pipeline/overrides.py` → overwrites `data/category-overrides.json`
+3. `python3 pipeline/merge.py` → picks up the updated overrides and rebuilds `data/chart_data.json`
+4. `python3 pipeline/build.py` → regenerates `index.html`
 
-To add a new category or subcategory, also update `build.py` — add zh/en labels to `cat_labels` and `sub_labels` in the `i18n` dict, and add a color to `CAT_COLORS` in `apply_overrides.py`.
+To add a new category or subcategory, also update `pipeline/build.py` — add zh/en labels to `cat_labels` and `sub_labels` in the `i18n` dict, and add a color to `CAT_COLORS` in `pipeline/merge.py`.
 
 ## Scraper notes
 
 - Uses Playwright with a persistent Chrome profile (`mcp-chrome-235b035`) to reuse an active Threads login session
 - Intercepts `api/graphql` responses to extract structured reply data (author, text, likes, timestamp, URL) — more reliable than DOM parsing
 - Scrolls up to 120 times at 1.8s intervals; stops after 6 consecutive scrolls with no new replies
-- Chromium binary path is hardcoded to the local installation — update `CHROMIUM_EXEC` in `scripts/scrape_new_replies.js` if it changes
+- Chromium binary path is hardcoded to the local installation — update `CHROMIUM_EXEC` in `pipeline/scrape.js` if it changes
 
 ---
 

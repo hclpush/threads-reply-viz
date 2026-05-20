@@ -1,5 +1,6 @@
 .DS_Store
-scripts/node_modules/
-scripts/package-lock.json
-data-v2/raw-scraped.json
-data-v2/classified-new-replies.json
+pipeline/node_modules/
+pipeline/package-lock.json
+data/.backup/
+data/staging/raw-scraped.json
+data/staging/classified-batch.json

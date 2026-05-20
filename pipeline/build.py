@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 import json, base64, os, unicodedata, argparse
+from pathlib import Path
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+ROOT = Path(__file__).resolve().parent.parent
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data-dir', default='data', help='data directory (default: data)')
 args = parser.parse_args()
 
-DATA_DIR = os.path.join(BASE, args.data_dir)
+DATA_DIR = ROOT / args.data_dir
 
 # Load + sanitize data
-with open(os.path.join(DATA_DIR, 'chart_data.json'), encoding='utf-8') as f:
+with open(DATA_DIR / 'chart_data.json', encoding='utf-8') as f:
     cd = json.load(f)
 
 def clean(s):
@@ -145,13 +146,13 @@ i18n = {
 i18n_js = json.dumps(i18n, ensure_ascii=True)
 
 # Read HTML template
-with open(os.path.join(BASE, 'index_template.html'), encoding='utf-8') as f:
+with open(ROOT / 'index_template.html', encoding='utf-8') as f:
     html = f.read()
 
 html = html.replace('__DATA_B64__', data_b64)
 html = html.replace('__I18N__', i18n_js)
 
-out = os.path.join(BASE, 'index.html')
+out = ROOT / 'index.html'
 with open(out, 'w', encoding='utf-8') as f:
     f.write(html)
 

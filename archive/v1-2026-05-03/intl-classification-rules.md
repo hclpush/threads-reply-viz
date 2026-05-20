@@ -33,7 +33,8 @@ These are always false regardless of how universal the surrounding situation loo
 ### Culturally specific
 - **TW-specific brand confusion as punchline** — 50嵐, 統一發票/統一編號, 104, 健達情趣蛋, 葉問/業務. Note: brand presence alone is fine; only mark false if the brand IS the joke.
 - **Cigarettes / TW slang** — 七星, 長壽 when used as cigarette names
-- **Chinese pop culture references** as punchline — Show Lo lyrics, Jay Chou half-song, Chinese movie names (笑傲飛鷹)
+- **Chinese pop culture references** as punchline — Show Lo lyrics, Jay Chou half-song, Chinese movie names (笑傲飛鷹, 拆彈專家2 misspoken as 炸彈超人)
+- **Local TW shop/product names as punchline** — 翰林茶館, 913茶王, ATT mall-specific context
 - **Chinese name puns** — 姓大→大小姐, 侑襄/柚香, 溫蒂漫步/溫室雜草, 關心妍/關菊英
 - **Chinese-specific holidays/concepts** — 端午節 vs 中秋節 mix-up
 - **Chinese-specific food names that ARE the joke** — 冬瓜澑澑, 八寶冰, 觀落陰
@@ -105,6 +106,7 @@ These are always false regardless of how universal the surrounding situation loo
 | Brand mentioned in passing (Starbucks, IKEA) | Universal | The setting is global |
 | Mistaken-identity story with Chinese name | Universal | Name doesn't matter; situation does |
 | Incomplete text (cut off mid-story) | Default `true` unless visible Chinese-pun keywords | Benefit of the doubt |
+| Nonsensical / context-free one-liner (no story, no punchline) | `false` | e.g. "輝達北士科" — no joke survives translation because there's no joke |
 | Reply-to-OP (回覆原 PO category) | Always `false` | Meta reactions, not stories |
 
 ---

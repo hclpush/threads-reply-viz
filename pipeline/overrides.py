@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Generates data/category-overrides.json from hand-classified 其他 items.
-Run once: python3 generate_overrides.py
+Run: python3 pipeline/overrides.py
 """
 import json, os
+from pathlib import Path
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / 'data'
 
 # URL -> (category, subcategory|None)
 OVERRIDES = {
@@ -451,7 +453,7 @@ def main():
     out = {url: {"category": cat, "subcategory": sub}
            for url, (cat, sub) in OVERRIDES.items()}
 
-    out_path = os.path.join(BASE, "data/category-overrides.json")
+    out_path = DATA / 'category-overrides.json'
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     print(f"Written {len(out)} overrides → {out_path}")

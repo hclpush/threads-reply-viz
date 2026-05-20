@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-Builds data-v2/replies.json and data-v2/chart_data.json by:
-1. Merging existing 683 replies with 472 new classified replies
-2. Updating like counts for existing replies (likes only, NO category changes)
-3. Applying existing category-overrides.json to ALL replies
-4. Rebuilding chart_data.json
+Merges the latest classified batch into the live dataset:
+1. Snapshots current data/replies.json to data/.backup/ before any write
+2. Updates like counts for existing replies from staging/raw-scraped.json (likes only)
+3. Appends new classified replies from staging/classified-batch.json
+4. Applies data/category-overrides.json to ALL replies
+5. Rebuilds data/chart_data.json
 
-Run: python3 build_v2_data.py
+Run: python3 pipeline/merge.py
 """
-import json, os, shutil
+import json, os
 from collections import defaultdict
+from datetime import datetime
+from pathlib import Path
 
-BASE     = os.path.dirname(os.path.abspath(__file__))
-DATA_V1  = os.path.join(BASE, 'data')
-DATA_V2  = os.path.join(BASE, 'data-v2')
+ROOT    = Path(__file__).resolve().parent.parent
+DATA    = ROOT / 'data'
+STAGING = DATA / 'staging'
+BACKUP  = DATA / '.backup'
 
 # ── Category color map ────────────────────────────────────────────────────────
 CAT_COLORS = {
@@ -117,25 +121,34 @@ def rebuild_chart_data(replies, source_post, overrides):
 
 
 def main():
-    os.makedirs(DATA_V2, exist_ok=True)
+    replies_path  = DATA / 'replies.json'
+    chart_path    = DATA / 'chart_data.json'
 
-    # Load existing data (v1)
-    v1           = load(os.path.join(DATA_V1, 'replies.json'))
-    old_replies  = v1['replies']          # list of dicts
-    source_post  = v1.get('sourcePost', '')
+    # Snapshot current dataset before any write — merge.py reads and writes the same file
+    if replies_path.exists():
+        BACKUP.mkdir(exist_ok=True)
+        stamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+        backup_path = BACKUP / f'replies.{stamp}.json'
+        backup_path.write_bytes(replies_path.read_bytes())
+        print(f"Backed up current dataset → {backup_path}")
+
+    # Load current live dataset
+    current      = load(replies_path)
+    old_replies  = current['replies']
+    source_post  = current.get('sourcePost', '')
     print(f"Loaded {len(old_replies)} existing replies.")
 
-    # Load scraped data (like count updates for old, new replies)
-    raw_scraped  = load(os.path.join(DATA_V2, 'raw-scraped.json'))
-    updated_likes = raw_scraped.get('updatedLikes', {})  # url -> {likes, likesNum}
+    # Load latest scrape (like-count updates for existing rows)
+    raw_scraped  = load(STAGING / 'raw-scraped.json')
+    updated_likes = raw_scraped.get('updatedLikes', {})
     print(f"Like count updates for existing: {len(updated_likes)}")
 
-    # Load new classified replies
-    new_replies  = load(os.path.join(DATA_V2, 'classified-new-replies.json'))
+    # Load latest classified batch
+    new_replies  = load(STAGING / 'classified-batch.json')
     print(f"New replies to add: {len(new_replies)}")
 
-    # Load overrides (v1 overrides still apply to all)
-    overrides    = load(os.path.join(DATA_V1, 'category-overrides.json'))
+    # Load overrides
+    overrides    = load(DATA / 'category-overrides.json')
     print(f"Overrides loaded: {len(overrides)} entries")
 
     # ── Step 1: Update like counts in existing replies (categories unchanged) ──
@@ -149,8 +162,7 @@ def main():
             likes_updated += 1
     print(f"Updated likes for {likes_updated} existing replies.")
 
-    # ── Step 2: Merge old + new ───────────────────────────────────────────────
-    # Deduplicate by URL (old replies take precedence for category/subcategory)
+    # ── Step 2: Merge old + new (dedup by URL; existing rows win) ─────────────
     merged_by_url = {}
     for r in old_replies:
         merged_by_url[r['url']] = r
@@ -162,39 +174,22 @@ def main():
     merged = list(merged_by_url.values())
     print(f"Merged total: {len(merged)} replies (was {len(old_replies)}, added {len(merged) - len(old_replies)})")
 
-    # ── Step 3: Save replies.json v2 ─────────────────────────────────────────
-    v2_replies_path = os.path.join(DATA_V2, 'replies.json')
-    v2_replies = {
+    # ── Step 3: Write merged dataset back to data/replies.json ────────────────
+    save(replies_path, {
         "replies":    merged,
         "categories": list(CAT_COLORS.keys()),
         "total":      len(merged),
         "sourcePost": source_post,
-    }
-    save(v2_replies_path, v2_replies)
+    })
 
-    # ── Step 4: Copy overrides, rebuild chart_data ────────────────────────────
-    shutil.copy2(
-        os.path.join(DATA_V1, 'category-overrides.json'),
-        os.path.join(DATA_V2, 'category-overrides.json'),
-    )
-    shutil.copy2(
-        os.path.join(DATA_V1, 'category-map.json'),
-        os.path.join(DATA_V2, 'category-map.json'),
-    )
-    print("Copied overrides + category-map to data-v2/")
-
-    # Apply overrides in-place when building chart_data
-    # (overrides mutate r['category'] / r['subcategory'] for chart only)
+    # ── Step 4: Rebuild chart_data with overrides applied ─────────────────────
     import copy
     merged_for_chart = copy.deepcopy(merged)
     chart_data = rebuild_chart_data(merged_for_chart, source_post, overrides)
-
-    # Save chart_data.json
-    chart_path = os.path.join(DATA_V2, 'chart_data.json')
     save(chart_path, chart_data)
 
     # ── Summary ───────────────────────────────────────────────────────────────
-    print(f"\nv2 Category breakdown (by likes):")
+    print(f"\nCategory breakdown (by likes):")
     cat_stats = chart_data['catStats']
     for cat in chart_data['catLabels']:
         s = cat_stats[cat]

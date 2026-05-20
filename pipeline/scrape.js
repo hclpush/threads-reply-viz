@@ -1,6 +1,6 @@
-// Scrapes new replies from the source Threads post and saves to data-v2/raw-scraped.json
+// Scrapes new replies from the source Threads post and saves to data/staging/raw-scraped.json
 // Strategy: intercept GraphQL API responses to extract structured reply data
-// Run: node scripts/scrape_new_replies.js  (from project root)
+// Run: node pipeline/scrape.js  (from project root)
 
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -8,7 +8,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE_POST = 'https://www.threads.com/@betabreakhsin/post/DXzS3YEEY8t';
-const OUT_DIR = path.join(ROOT, 'data-v2');
+const OUT_DIR = path.join(ROOT, 'data', 'staging');
 const OUT_FILE = path.join(OUT_DIR, 'raw-scraped.json');
 const EXISTING_FILE = path.join(ROOT, 'data', 'replies.json');
 

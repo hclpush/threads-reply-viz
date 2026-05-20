@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Classifies new replies in data-v2/raw-scraped.json → data-v2/classified-new-replies.json
-Run: python3 classify_new_replies.py
+Classifies the latest scrape batch.
+  Input:  data/staging/raw-scraped.json
+  Output: data/staging/classified-batch.json
+Run: python3 pipeline/classify.py
 """
 import json, os, re
 from collections import Counter
+from pathlib import Path
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+ROOT = Path(__file__).resolve().parent.parent
+STAGING = ROOT / 'data' / 'staging'
 
 
 def has(text, *keywords):
@@ -405,8 +409,8 @@ def classify(text):
 
 
 def main():
-    in_path  = os.path.join(BASE, 'data-v2', 'raw-scraped.json')
-    out_path = os.path.join(BASE, 'data-v2', 'classified-new-replies.json')
+    in_path  = STAGING / 'raw-scraped.json'
+    out_path = STAGING / 'classified-batch.json'
 
     with open(in_path, encoding='utf-8') as f:
         raw = json.load(f)

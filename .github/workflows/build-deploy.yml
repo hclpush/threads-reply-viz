@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
 
       - name: Build dashboard
-        run: python3 build.py --data-dir data-v2
+        run: python3 pipeline/build.py
 
       - name: Sanity check
         run: |
@@ -38,7 +38,7 @@ jobs:
               assert token in html, f"Missing expected token: {token}"
 
           # data files are valid JSON with expected reply count
-          with open("data-v2/replies.json", "r", encoding="utf-8") as f:
+          with open("data/replies.json", "r", encoding="utf-8") as f:
               data = json.load(f)
           reply_count = len(data["replies"])
           assert reply_count >= 1155, f"Reply count dropped: {reply_count}"
