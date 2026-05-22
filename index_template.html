@@ -131,7 +131,7 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 .wm-back[disabled]{display:none}
 .wm-nav{display:flex;gap:8px;margin-bottom:14px}
 .wm-screen{min-height:170px}
-.wm-bullets{list-style:none;padding:0 0 0 40px;margin:0;font-size:13px;color:#9a9a9a;line-height:1.7;text-align:left}
+.wm-bullets{list-style:none;padding:0 0 0 18px;margin:0 auto;width:fit-content;max-width:100%;font-size:13px;color:#9a9a9a;line-height:1.7;text-align:left}
 .wm-bullets li{padding-left:18px;position:relative}
 .wm-bullets li::before{content:"•";position:absolute;left:4px;color:var(--ac)}
 .wm-dots{display:flex;justify-content:center;gap:6px;margin:16px 0 18px}
@@ -208,7 +208,7 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
   <div><h1 id="ht"></h1><p id="hs"></p><p class="sub-en" id="sub-en" style="display:none"></p></div>
   <div class="hr">
     <div class="tg">
-      <button id="bzh" onclick="sL('zh')">&#20013;</button>
+      <button id="bzh" onclick="sL('zh')">&#20013;&#25991;</button>
       <button id="ben" onclick="sL('en')">EN</button>
     </div>
   </div>
@@ -275,7 +275,7 @@ var _wStep = 1;
 var MODAL_CONTENT = {
   "en": {
     s1_h1: "Pick your language",
-    s1_h2_tpl: "We've translated {n} moments to English\nSwitch to 中 anytime for the full set",
+    s1_h2_tpl: "We've translated {n} moments to English\nSwitch to 中文 anytime for the full set",
     s2_h1: "1155 Cringe Moments",
     s2_h2: "Public embarrassments from a viral Threads post\nsorted into 10 categories",
     s3_h1: "How to explore",
@@ -589,7 +589,7 @@ function aI(){
     var translated=D.replies.filter(function(r){return r.i===true && r.te;}).length;
     var total=D.replies.length;
     subEl.textContent = isEN()
-      ? (translated + " jokes translatable to English — switch to 中 for all")
+      ? (translated + " jokes translatable to English — switch to 中文 for all")
       : ("完整中文版 " + total + " 則 — 切換 EN 看 " + translated + " 則翻譯");
     subEl.style.display="block";
   }
