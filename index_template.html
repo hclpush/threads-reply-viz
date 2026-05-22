@@ -418,37 +418,30 @@ function tS(s){ return (I[lg].sub_labels[s]||s); }
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
 function escH(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
-function fmtK(n){
-  if(n >= 1000) return (n/1000).toFixed(1).replace(/\.0$/,'')+'K';
-  return String(n);
-}
-
 function bS(){
   var V=vData();
   var el=document.getElementById("sl"), h="";
-  // Total likes across all visible rows (for the "All categories" entry)
-  var totalLikes = V.labels.reduce(function(sum,c){ return sum + V.stats[c].totalLikes; }, 0);
   h += '<div class="ci'+(af?"":" on")+'" data-cat="">'
     + '<div class="cd" style="background:#555"></div>'
     + '<span class="cn">'+t("all_categories")+'</span>'
-    + '<span class="cc">'+fmtK(totalLikes)+'</span></div>'
+    + '<span class="cc">'+V.total+'</span></div>'
     + '<div class="dv"></div>';
-  // Sort parent categories by totalLikes desc (was: by count) — matches chart + the descending intent
-  V.labels.slice().sort(function(a,b){ return V.stats[b].totalLikes-V.stats[a].totalLikes; }).forEach(function(mc){
+  // Sort parent categories AND subcategories by reply count desc; display reply count
+  V.labels.slice().sort(function(a,b){ return V.stats[b].count-V.stats[a].count; }).forEach(function(mc){
     var s=V.stats[mc], ia=(af&&af.c===mc);
     var _desc=esc(tD(mc));
     h += '<div class="ci'+(ia?" on":"")+'" data-cat="'+esc(mc)+'">'
       + '<div class="cd" style="background:'+CC[mc]+'"></div>'
       + '<span class="cn">'+tC(mc)+'</span>'
       + (_desc?'<button class="qi" data-desc="'+_desc+'" onclick="showPop(event)">ⓘ</button>':'')
-      + '<span class="cc">'+fmtK(s.totalLikes)+'</span></div>';
+      + '<span class="cc">'+s.count+'</span></div>';
     Object.entries(s.subcategories||{})
-      .sort(function(a,b){ return b[1].totalLikes-a[1].totalLikes; })
+      .sort(function(a,b){ return b[1].count-a[1].count; })
       .forEach(function(e){
         var sc=e[0], ss=e[1], ias=(af&&af.c===mc&&af.s===sc);
         h += '<div class="si'+(ias?" on":"")+'" data-cat="'+esc(mc)+'" data-sub="'+esc(sc)+'">'
           + '<span class="sn'+(ias?" on":"")+'">'+tS(sc)+'</span>'
-          + '<span class="sc2">'+fmtK(ss.totalLikes)+'</span></div>';
+          + '<span class="sc2">'+ss.count+'</span></div>';
       });
   });
   el.innerHTML=h;
