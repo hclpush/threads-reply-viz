@@ -6,12 +6,12 @@ An interactive analysis of replies to a viral Threads post asking people to shar
 
 ## Features
 
-- **Stacked bar chart** — categories sorted by total likes or reply count, with graded subcategory breakdown
-- **Toggle** between likes view and reply count view
-- **Sidebar filters** — categories ranked by count; click any category or subcategory to filter the table
-- **Search** — filter by reply text or author handle
-- **EN / 中 toggle** — full bilingual UI
-- **Direct links** — every reply row links to the original Threads reply and Google Translate
+- **Stacked bar chart** — categories ranked by total likes, with subcategory breakdown stacked by likes within each bar
+- **Sidebar filters** — categories and subcategories ranked by likes; click any row to filter the reply table
+- **Search** — filter by reply text or author handle (`@handle` works)
+- **EN / 中 toggle** — full bilingual UI. EN mode shows only the 455 universal replies in pre-translated English; 中 mode shows all 1,155 in original Chinese
+- **3-screen welcome modal** — auto-shown on first visit (pre-selects EN or 中 based on browser language). Floating `?` button reopens it anytime
+- **Direct links** — every reply row links to the original Threads reply
 
 ## How to use
 
@@ -39,7 +39,7 @@ Open `index.html` in any modern browser — no server needed, fully self-contain
 | original | 683 | 2026-05-03 | Top-engagement replies only; preserved in `archive/v1-2026-05-03/` |
 | current | 1,155 | 2026-05-15 | Live dataset in `data/`; added 472 new replies, refreshed like counts for 250 existing |
 
-**Bilingual:** 469 replies are classified as `intl=true` (universal, translation lands cleanly in English) and have a `text_en` field. The remaining 686 lean on Taiwan-specific puns, slang, or cultural context and stay in original Chinese only. In EN mode the dashboard shows only the 469 translatable ones; in 中 mode it shows all 1,155.
+**Bilingual:** 455 replies are classified as `intl=true` (universal, translation lands cleanly in English) and have a `text_en` field. The remaining 700 lean on Taiwan-specific puns, slang, or cultural context and stay in original Chinese only. In EN mode the dashboard shows only the 455 translatable ones; in 中 mode it shows all 1,155.
 
 ## File structure
 
