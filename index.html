@@ -128,7 +128,7 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 .wm-cta:hover{opacity:.82}
 .wm-back{padding:13px 16px;background:transparent;color:#888;border:1px solid #2a2a2a;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--fn);transition:color 140ms,border-color 140ms}
 .wm-back:hover{color:#ccc;border-color:#3a3a3a}
-.wm-back[disabled]{visibility:hidden}
+.wm-back[disabled]{display:none}
 .wm-nav{display:flex;gap:8px;margin-bottom:14px}
 .wm-screen{min-height:170px}
 .wm-bullets{list-style:none;padding:0 0 0 40px;margin:0;font-size:13px;color:#9a9a9a;line-height:1.7;text-align:left}
@@ -170,22 +170,22 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
     <div class="wm-screen" data-step="1">
       <h2 class="wm-h1" id="wm-s1-h1"></h2>
       <p class="wm-h2" id="wm-s1-h2"></p>
-    </div>
-
-    <div class="wm-screen" data-step="2" style="display:none">
-      <h2 class="wm-h1" id="wm-s2-h1"></h2>
-      <ul class="wm-bullets" id="wm-s2-list"></ul>
-    </div>
-
-    <div class="wm-screen" data-step="3" style="display:none">
-      <h2 class="wm-h1" id="wm-s3-h1"></h2>
-      <p class="wm-h2" id="wm-s3-h2"></p>
       <div class="wm-lr">
         <div class="wm-tg">
           <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
           <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
         </div>
       </div>
+    </div>
+
+    <div class="wm-screen" data-step="2" style="display:none">
+      <h2 class="wm-h1" id="wm-s2-h1"></h2>
+      <p class="wm-h2" id="wm-s2-h2"></p>
+    </div>
+
+    <div class="wm-screen" data-step="3" style="display:none">
+      <h2 class="wm-h1" id="wm-s3-h1"></h2>
+      <ul class="wm-bullets" id="wm-s3-list"></ul>
     </div>
 
     <div class="wm-dots">
@@ -274,28 +274,28 @@ var _wStep = 1;
 
 var MODAL_CONTENT = {
   "en": {
-    s1_h1: "1155 Cringe Moments",
-    s1_h2: "Public embarrassments from a viral Threads post\nsorted into 10 categories",
-    s2_h1: "How to explore",
-    s2_list: [
+    s1_h1: "Pick your language",
+    s1_h2_tpl: "We've translated {n} moments to English\nSwitch to 中 anytime for the full set",
+    s2_h1: "1155 Cringe Moments",
+    s2_h2: "Public embarrassments from a viral Threads post\nsorted into 10 categories",
+    s3_h1: "How to explore",
+    s3_list: [
       "Click any chart bar or sidebar category to filter",
       "Search by reply text or @author",
     ],
-    s3_h1: "Pick your language",
-    s3_h2_tpl: "We've translated {n} moments to English\nSwitch to 中 anytime for the full set",
     next: "Next", start: "Start exploring", back: "Back",
     dont_show: "Don't show this again",
   },
   "zh": {
-    s1_h1: "1155 個社死現場",
-    s1_h2: "Threads 爆紅貼文的回覆精選\n分成 10 個社死類別",
-    s2_h1: "怎麼瀏覽",
-    s2_list: [
-      "點圖表的長條或側邊欄類別來篩選",
+    s1_h1: "選擇語言",
+    s1_h2_tpl: "我們翻譯了 {n} 則英文使用者也能看懂的笑點\n中文版全部有 1155 則",
+    s2_h1: "1155 個社死現場",
+    s2_h2: "Threads 爆紅貼文的回覆精選\n分成 10 個社死類別",
+    s3_h1: "怎麼瀏覽",
+    s3_list: [
+      "點選圖表的長條或側邊分類篩選類別",
       "用搜尋框找回覆內容或 @作者",
     ],
-    s3_h1: "選擇語言",
-    s3_h2_tpl: "我們翻譯了 {n} 則英文使用者也能看懂的笑點\n中文版有全部 1155 則",
     next: "下一步", start: "開始探索", back: "上一步",
     dont_show: "不要再顯示",
   }
@@ -308,14 +308,14 @@ function wML(l){
   var M = MODAL_CONTENT[l] || MODAL_CONTENT.en;
   var translated = D.replies.filter(function(r){return r.i===true && r.te;}).length;
   document.getElementById("wm-s1-h1").textContent = M.s1_h1;
-  document.getElementById("wm-s1-h2").textContent = M.s1_h2;
+  document.getElementById("wm-s1-h2").textContent = M.s1_h2_tpl.replace("{n}", translated);
   document.getElementById("wm-s2-h1").textContent = M.s2_h1;
-  var ul = document.getElementById("wm-s2-list"); ul.innerHTML = "";
-  M.s2_list.forEach(function(item){
+  document.getElementById("wm-s2-h2").textContent = M.s2_h2;
+  document.getElementById("wm-s3-h1").textContent = M.s3_h1;
+  var ul = document.getElementById("wm-s3-list"); ul.innerHTML = "";
+  M.s3_list.forEach(function(item){
     var li = document.createElement("li"); li.textContent = item; ul.appendChild(li);
   });
-  document.getElementById("wm-s3-h1").textContent = M.s3_h1;
-  document.getElementById("wm-s3-h2").textContent = M.s3_h2_tpl.replace("{n}", translated);
   document.getElementById("wm-back-l").textContent = M.back;
   document.getElementById("wm-cta-l").textContent = _wStep === 3 ? M.start : M.next;
   document.getElementById("wm-dont-show").textContent = M.dont_show;
