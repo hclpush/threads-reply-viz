@@ -39,25 +39,30 @@ Open `index.html` in any modern browser — no server needed, fully self-contain
 | original | 683 | 2026-05-03 | Top-engagement replies only; preserved in `archive/v1-2026-05-03/` |
 | current | 1,155 | 2026-05-15 | Live dataset in `data/`; added 472 new replies, refreshed like counts for 250 existing |
 
+**Bilingual:** 469 replies are classified as `intl=true` (universal, translation lands cleanly in English) and have a `text_en` field. The remaining 686 lean on Taiwan-specific puns, slang, or cultural context and stay in original Chinese only. In EN mode the dashboard shows only the 469 translatable ones; in 中 mode it shows all 1,155.
+
 ## File structure
 
 ```
 data/                            # live, current dataset
-  replies.json                     # 1,155 replies, full fields
+  replies.json                     # 1,155 replies, full fields (incl. text_en where intl=true)
   chart_data.json                  # compact format for dashboard
   category-map.json                # taxonomy reference
   category-overrides.json          # URL → {category, subcategory} manual overrides
   staging/                         # in-flight batches (gitignored)
     raw-scraped.json                 # latest scrape output, unclassified
     classified-batch.json            # latest batch after classification, pre-merge
-  .backup/                         # snapshot before each merge.py run (gitignored)
+    translated-batch.json            # latest batch after translation, pre-merge
+  .backup/                         # snapshots before destructive writes (gitignored)
+    manual-translations.json         # working file for batch translations done in Claude Code
 
 pipeline/                        # ordered pipeline scripts
   scrape.js                        # 1. Playwright scraper → staging/raw-scraped.json
   classify.py                      # 2. keyword classifier → staging/classified-batch.json
   overrides.py                     # (optional) regenerate data/category-overrides.json
-  merge.py                         # 3. merge batch into data/, rebuild chart_data.json
-  build.py                         # 4. bake chart_data.json + i18n → index.html
+  translate.py                     # 3. (optional) translate intl=true replies via Claude API
+  merge.py                         # 4. merge batch into data/, rebuild chart_data.json
+  build.py                         # 5. bake chart_data.json + i18n → index.html
   package.json                     # Playwright dependency for scrape.js
 
 archive/                         # frozen historical snapshots
@@ -83,16 +88,28 @@ python3 pipeline/classify.py
 #    Edit pipeline/overrides.py → add to OVERRIDES dict
 #    python3 pipeline/overrides.py  (writes data/category-overrides.json)
 
-# 4. Merge batch into live dataset (auto-snapshots data/replies.json → data/.backup/ first)
-python3 pipeline/merge.py
-# → writes data/replies.json, data/chart_data.json
+# 4. (Optional) translate intl=true replies via Claude API (needs ANTHROPIC_API_KEY in .env)
+python3 pipeline/translate.py
+# → writes data/staging/translated-batch.json
+# Alternative: do translations manually in a Claude Code session — append to
+# data/.backup/manual-translations.json, then merge.py picks them up next run.
 
-# 5. Rebuild dashboard
+# 5. Merge batch into live dataset (auto-snapshots data/replies.json → data/.backup/ first)
+python3 pipeline/merge.py
+# → writes data/replies.json (incl. text_en), data/chart_data.json
+
+# 6. Rebuild dashboard
 python3 pipeline/build.py
 # → overwrites index.html
 ```
 
-CI runs step 5 automatically on every push to `main`.
+CI runs step 6 automatically on every push to `main`.
+
+## Translation notes
+
+- Only replies with `intl=true` get translated. Taiwan-specific puns / slang / cultural context (`intl=false`) stay in original Chinese only.
+- If a translation reads awkwardly (the joke depends on Chinese phonology, e.g. 接頭/龜頭, 戚風/威風), reclassify the row to `intl=false` rather than try to translate the unrenderable pun.
+- The dashboard's language toggle drives both text language AND row filtering: EN mode shows only translated rows, 中 mode shows all.
 
 ## Reclassifying replies (manual overrides)
 

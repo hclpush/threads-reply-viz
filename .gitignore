@@ -1,6 +1,8 @@
 .DS_Store
+.env
 pipeline/node_modules/
 pipeline/package-lock.json
 data/.backup/
 data/staging/raw-scraped.json
 data/staging/classified-batch.json
+data/staging/translated-batch.json

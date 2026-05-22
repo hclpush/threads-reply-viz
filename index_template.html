@@ -43,6 +43,7 @@ a{color:inherit;text-decoration:none}
 .hd{padding:12px 20px;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bg2)}
 .hd h1{font-size:15px;font-weight:700;letter-spacing:-.02em;color:#fff}
 .hd p{font-size:11px;color:var(--mu);margin-top:3px;line-height:1.5}
+.hd .sub-en{font-size:10.5px;color:#666;margin-top:4px;letter-spacing:.02em}
 .hr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 /* Toggle pill */
@@ -93,9 +94,9 @@ tbody tr:hover{background:var(--bg3)}
 .bg{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.01em}
 .sbg{display:block;font-size:10px;color:var(--mu);margin-top:2px}
 .ta2{padding:10px 7px;font-size:11px;color:var(--mu);white-space:nowrap;width:100px;overflow:hidden;text-overflow:ellipsis}
-.tx{padding:10px 10px;font-size:12.5px;line-height:1.6;color:#b0b0b0;max-width:0}
-.tx div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tlk{padding:10px 10px;white-space:nowrap;width:64px}
+.tx{padding:10px 12px;font-size:12.5px;line-height:1.6;color:#e0e0e0;max-width:0;min-width:280px}
+.tx div{white-space:pre-wrap;word-break:break-word}
+.tlk{padding:10px 8px;white-space:nowrap;width:36px}
 .lb{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:var(--bg3);border:1px solid var(--br);font-size:12px;margin-right:2px;transition:background var(--tr),border-color var(--tr)}
 .lb:hover{background:var(--bg4);border-color:var(--br2)}
 .nr{text-align:center;padding:56px 20px;color:var(--mu);font-size:13px;line-height:1.6}
@@ -116,17 +117,30 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
 .wm-tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
 .wm-h1{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1.25;margin-bottom:3px}
 .wm-h1.dim{color:#666;margin-bottom:20px}
-.wm-h2{font-size:13px;font-weight:400;color:#555;line-height:1.5;margin-bottom:22px}
+.wm-h2{font-size:13px;font-weight:400;color:#555;line-height:1.5;margin-bottom:22px;white-space:pre-line}
 .wm-div{height:1px;background:#1d1d1d;margin:0 0 22px}
 .wm-lr{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px}
 .wm-ll{font-size:12px;color:#3e3e3e}
 .wm-tg{display:flex;background:#1a1a1a;border:1px solid #222;border-radius:20px;padding:2px}
 .wm-lb{padding:5px 18px;font-size:12px;font-weight:600;cursor:pointer;color:#3e3e3e;border:none;background:transparent;border-radius:16px;transition:all 140ms ease;font-family:var(--fn)}
 .wm-lb.on{background:#fff;color:#000}
-.wm-cta{width:100%;padding:13px;background:var(--ac);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--fn);letter-spacing:.03em;transition:opacity 140ms;margin-bottom:16px}
+.wm-cta{flex:1;padding:13px;background:var(--ac);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--fn);letter-spacing:.03em;transition:opacity 140ms}
 .wm-cta:hover{opacity:.82}
+.wm-back{padding:13px 16px;background:transparent;color:#888;border:1px solid #2a2a2a;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--fn);transition:color 140ms,border-color 140ms}
+.wm-back:hover{color:#ccc;border-color:#3a3a3a}
+.wm-back[disabled]{visibility:hidden}
+.wm-nav{display:flex;gap:8px;margin-bottom:14px}
+.wm-screen{min-height:120px}
+.wm-bullets{list-style:none;padding:0;margin:8px 0 0;font-size:13px;color:#9a9a9a;line-height:1.7;text-align:left}
+.wm-bullets li{padding-left:18px;position:relative}
+.wm-bullets li::before{content:"•";position:absolute;left:4px;color:var(--ac)}
+.wm-dots{display:flex;justify-content:center;gap:6px;margin:16px 0 18px}
+.wm-dot{width:6px;height:6px;border-radius:50%;background:#2c2c2c;transition:background 140ms,width 140ms,border-radius 140ms}
+.wm-dot.on{background:#fff;width:18px;border-radius:3px}
 .wm-ns{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;color:#666;cursor:pointer;user-select:none}
 .wm-ns input{accent-color:#666;cursor:pointer}
+.wm-help{position:fixed;bottom:14px;right:14px;width:30px;height:30px;border-radius:50%;background:#1a1a1a;border:1px solid #2a2a2a;color:#888;font-size:14px;font-weight:700;cursor:pointer;z-index:100;font-family:var(--fn);transition:all 140ms;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.wm-help:hover{background:#222;color:#fff;border-color:#3a3a3a}
 
 /* ── Category Popover ── */
 .qi{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;font-size:9px;line-height:1;color:#2c2c2c;cursor:pointer;flex-shrink:0;border:none;background:transparent;transition:color 120ms;font-family:var(--fn);padding:0}
@@ -152,34 +166,51 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
   <div class="wm-card">
     <div class="wm-pip"></div>
     <div class="wm-tag">@betabreakhsin</div>
-    <h2 class="wm-h1" id="wm-h1">Viral Post</h2>
-    <p class="wm-h1 dim" id="wm-h1-dim">Collection of Cringe Moments</p>
-    <p class="wm-h2" id="wm-h2">Aim to make you laugh</p>
-    <div class="wm-div"></div>
-    <div class="wm-lr">
-      <span class="wm-ll" id="wm-ll">Language:</span>
-      <div class="wm-tg">
-        <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
-        <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
+
+    <div class="wm-screen" data-step="1">
+      <h2 class="wm-h1" id="wm-s1-h1"></h2>
+      <p class="wm-h2" id="wm-s1-h2"></p>
+    </div>
+
+    <div class="wm-screen" data-step="2" style="display:none">
+      <h2 class="wm-h1" id="wm-s2-h1"></h2>
+      <ul class="wm-bullets" id="wm-s2-list"></ul>
+    </div>
+
+    <div class="wm-screen" data-step="3" style="display:none">
+      <h2 class="wm-h1" id="wm-s3-h1"></h2>
+      <p class="wm-h2" id="wm-s3-h2"></p>
+      <div class="wm-lr">
+        <div class="wm-tg">
+          <button id="wlb-en" class="wm-lb on" onclick="wML('en')">English</button>
+          <button id="wlb-zh" class="wm-lb" onclick="wML('zh')">&#20013;&#25991;</button>
+        </div>
       </div>
     </div>
-    <button class="wm-cta" id="wm-cta" onclick="wClose()">Start Exploring &#8594;</button>
+
+    <div class="wm-dots">
+      <span class="wm-dot on" data-step="1"></span>
+      <span class="wm-dot" data-step="2"></span>
+      <span class="wm-dot" data-step="3"></span>
+    </div>
+
+    <div class="wm-nav">
+      <button class="wm-back" id="wm-back" onclick="wStep(-1)">&#8592; <span id="wm-back-l"></span></button>
+      <button class="wm-cta" id="wm-cta" onclick="wStep(1)"><span id="wm-cta-l"></span> &#8594;</button>
+    </div>
+
     <label class="wm-ns"><input type="checkbox" id="wm-ns"> <span id="wm-dont-show">Don't show this again</span></label>
   </div>
 </div>
+<button class="wm-help" id="wm-help" onclick="wOpen()" aria-label="Reopen tour" title="Reopen tour">?</button>
 <div id="pop" class="pop"></div>
 <div class="hd">
-  <div><h1 id="ht"></h1><p id="hs"></p></div>
+  <div><h1 id="ht"></h1><p id="hs"></p><p class="sub-en" id="sub-en" style="display:none"></p></div>
   <div class="hr">
     <div class="tg">
       <button id="bzh" onclick="sL('zh')">&#20013;</button>
       <button id="ben" onclick="sL('en')">EN</button>
     </div>
-    <div class="tg">
-      <button id="blk" onclick="sV('likes')"></button>
-      <button id="bct" onclick="sV('count')"></button>
-    </div>
-    <button id="buo" class="uf-btn" onclick="sU()"></button>
   </div>
 </div>
 <div class="main">
@@ -233,29 +264,87 @@ var CAT_DESC = {
   }
 };
 
-var uOnly = false;
-
 function tD(c){ return (CAT_DESC[lg] && CAT_DESC[lg][c]) || ""; }
 function tCH(){ return lg==="zh" ? "↑ 點擊長條可篩選類別" : "↑ Click a bar to filter by category"; }
-function tUF(){ return I[lg].uf_on; }
-function tAF(){ return I[lg].uf_off; }
+function isEN(){ return lg === "en"; }
 
-/* ── Welcome Modal ── */
+/* ── Welcome Modal (3-step tour) ── */
 var _wlg = "en";
+var _wStep = 1;
+
+var MODAL_CONTENT = {
+  "en": {
+    s1_h1: "1,155 Cringe Moments",
+    s1_h2: "Public embarrassments from a viral Threads post —\nsorted into 10 categories.",
+    s2_h1: "How to explore",
+    s2_list: [
+      "Click any chart bar or sidebar category to filter",
+      "Search by reply text or @author",
+    ],
+    s3_h1: "Pick your language",
+    s3_h2_tpl: "We've translated {n} moments understandable for English speakers. Switch to 中 anytime for the full set.",
+    next: "Next", start: "Start exploring", back: "Back",
+    dont_show: "Don't show this again",
+  },
+  "zh": {
+    s1_h1: "1,155 個社死現場",
+    s1_h2: "Threads 爆紅貼文的回覆精選，分成 10 個社死類別。",
+    s2_h1: "怎麼瀏覽",
+    s2_list: [
+      "點圖表的長條或側邊欄類別來篩選",
+      "用搜尋框找回覆內容或 @作者",
+    ],
+    s3_h1: "選擇語言",
+    s3_h2_tpl: "我們翻譯了 {n} 則英文使用者也能看懂的笑點。中文版有全部 1,155 則。",
+    next: "下一步", start: "開始探索", back: "上一步",
+    dont_show: "不要再顯示",
+  }
+};
+
 function wML(l){
   _wlg = l;
   document.getElementById("wlb-en").className = "wm-lb"+(l==="en"?" on":"");
   document.getElementById("wlb-zh").className = "wm-lb"+(l==="zh"?" on":"");
-  var M = (typeof I !== "undefined" && I[l]) ? I[l] : null;
-  if(M){
-    document.getElementById("wm-h1").textContent = M.modal_h1;
-    document.getElementById("wm-h1-dim").textContent = M.modal_h1_dim;
-    document.getElementById("wm-h2").textContent = M.modal_h2;
-    document.getElementById("wm-ll").textContent = M.modal_lang_label;
-    document.getElementById("wm-cta").textContent = M.modal_cta;
-    document.getElementById("wm-dont-show").textContent = M.modal_dont_show;
-  }
+  var M = MODAL_CONTENT[l] || MODAL_CONTENT.en;
+  var translated = D.replies.filter(function(r){return r.i===true && r.te;}).length;
+  document.getElementById("wm-s1-h1").textContent = M.s1_h1;
+  document.getElementById("wm-s1-h2").textContent = M.s1_h2;
+  document.getElementById("wm-s2-h1").textContent = M.s2_h1;
+  var ul = document.getElementById("wm-s2-list"); ul.innerHTML = "";
+  M.s2_list.forEach(function(item){
+    var li = document.createElement("li"); li.textContent = item; ul.appendChild(li);
+  });
+  document.getElementById("wm-s3-h1").textContent = M.s3_h1;
+  document.getElementById("wm-s3-h2").textContent = M.s3_h2_tpl.replace("{n}", translated);
+  document.getElementById("wm-back-l").textContent = M.back;
+  document.getElementById("wm-cta-l").textContent = _wStep === 3 ? M.start : M.next;
+  document.getElementById("wm-dont-show").textContent = M.dont_show;
 }
+
+function wRenderStep(){
+  document.querySelectorAll("#wm .wm-screen").forEach(function(s){
+    s.style.display = (parseInt(s.getAttribute("data-step"),10) === _wStep) ? "block" : "none";
+  });
+  document.querySelectorAll("#wm .wm-dot").forEach(function(d){
+    d.className = "wm-dot"+(parseInt(d.getAttribute("data-step"),10) === _wStep ? " on" : "");
+  });
+  document.getElementById("wm-back").disabled = (_wStep === 1);
+  var M = MODAL_CONTENT[_wlg] || MODAL_CONTENT.en;
+  document.getElementById("wm-cta-l").textContent = _wStep === 3 ? M.start : M.next;
+}
+
+function wStep(delta){
+  if(delta === 1 && _wStep === 3){ wClose(); return; }
+  _wStep = Math.max(1, Math.min(3, _wStep + delta));
+  wRenderStep();
+}
+
+function wOpen(){
+  _wStep = 1;
+  wRenderStep();
+  document.getElementById("wm").style.display = "flex";
+}
+
 function wClose(){
   if(document.getElementById("wm-ns").checked) localStorage.setItem("wm_s","1");
   localStorage.setItem("wm_l", _wlg);
@@ -287,18 +376,13 @@ document.addEventListener("click", function(){
   hidePop();
 });
 
-function sU(){
-  uOnly = !uOnly;
-  var b = document.getElementById("buo");
-  if(b){ b.className = "uf-btn"+(uOnly?" on":""); b.textContent = uOnly ? tUF() : tAF(); }
-  // Clear stale active category filter if the current selection no longer has rows
-  if(af){
-    var V = vData();
-    if(!V.stats[af.c] || (af.s && !(V.stats[af.c].subcategories||{})[af.s])){
-      af = null;
-    }
+// Clear stale active category filter if the current selection no longer has rows
+function pruneAF(){
+  if(!af) return;
+  var V = vData();
+  if(!V.stats[af.c] || (af.s && !(V.stats[af.c].subcategories||{})[af.s])){
+    af = null;
   }
-  bS(); bC(); rT();
 }
 
 var lg="en", vw="likes", af=null, AC=null;
@@ -307,9 +391,9 @@ D.catLabels.forEach(function(c,i){ CC[c]=D.catColors[i]; });
 CC["其他"]="#787878";
 
 // Live view: recomputes catStats from filtered rows so chart + sidebar
-// reflect the universal-only toggle, not just the table.
+// reflect the EN-only-universal filter (driven by language, not a separate toggle).
 function vData(){
-  var rows = uOnly ? D.replies.filter(function(r){ return r.i===true; }) : D.replies;
+  var rows = isEN() ? D.replies.filter(function(r){ return r.i===true && r.te; }) : D.replies;
   var stats = {};
   rows.forEach(function(r){
     var c = r.c;
@@ -444,33 +528,32 @@ function rT(){
   var q=document.getElementById("si").value.toLowerCase().trim();
   var tokens = q ? q.split(/\s+/).filter(Boolean) : [];
   var tb=document.getElementById("tb"), nr=document.getElementById("nr");
-  var rows=D.replies;
+  var en = isEN();
+  var rows = en ? D.replies.filter(function(r){ return r.i===true && r.te; }) : D.replies;
   if(af) rows=rows.filter(function(r){ return r.c===af.c&&(!af.s||r.s===af.s); });
   if(tokens.length){
     rows=rows.filter(function(r){
-      var hay = r.t.toLowerCase()+" @"+r.a.toLowerCase();
+      var body = en ? (r.te||"") : (r.t||"");
+      var hay = body.toLowerCase()+" @"+r.a.toLowerCase();
       return tokens.every(function(tok){ return hay.indexOf(tok)>=0; });
     });
   }
-  if(uOnly) rows=rows.filter(function(r){ return r.i===true; });
   rows=rows.slice().sort(function(a,b){ return b.l-a.l; });
   if(!rows.length){ tb.innerHTML=""; nr.style.display="block"; return; }
   nr.style.display="none";
-  var aT=t("aria_open_threads"), aG=t("aria_open_translate");
+  var aT=t("aria_open_threads");
   var f=document.createDocumentFragment();
   rows.forEach(function(r){
     var tr=document.createElement("tr");
     var cl=CC[r.c]||"#888";
-    var gu="https://translate.google.com/?sl=zh-TW&tl=en&text="+encodeURIComponent(r.t);
     var sb=r.s ? ('<span class="sbg">'+escH(tS(r.s))+"</span>") : "";
-    var sf=escH(r.t);
-    var tt=esc(r.t).replace(/\n/g," ");
-    var linkHtml=(r.u ? '<a href="'+esc(r.u)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aT)+'" class="lb">&#128279;</a>' : "")
-                +(lg==="en" ? '<a href="'+esc(gu)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aG)+'" class="lb">&#127760;</a>' : "");
+    var body = en ? r.te : r.t;
+    var sf=escH(body);
+    var linkHtml=(r.u ? '<a href="'+esc(r.u)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(aT)+'" class="lb">&#128279;</a>' : "");
     tr.innerHTML='<td class="tl">'+escH(r.ls)+'</td>'
       +'<td class="tc"><span class="bg" style="background:'+cl+'22;color:'+cl+'">'+escH(tC(r.c))+'</span>'+sb+'</td>'
       +'<td class="ta2">@'+escH(r.a)+'</td>'
-      +'<td class="tx"><div title="'+tt+'">'+sf+'</div></td>'
+      +'<td class="tx"><div>'+sf+'</div></td>'
       +'<td class="tlk">'+linkHtml+'</td>';
     f.appendChild(tr);
   });
@@ -490,8 +573,6 @@ function aI(){
   document.getElementById("ht").textContent=t("title");
   document.getElementById("hs").textContent=t("subtitle");
   document.getElementById("si").placeholder=t("search_placeholder");
-  document.getElementById("blk").textContent=t("toggle_likes");
-  document.getElementById("bct").textContent=t("toggle_count");
   document.getElementById("c1").textContent=t("col_likes");
   document.getElementById("c2").textContent=t("col_category");
   document.getElementById("c3").textContent=t("col_author");
@@ -500,8 +581,18 @@ function aI(){
   document.getElementById("fs").textContent=t("source");
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
-  var bu=document.getElementById("buo"); if(bu){ bu.textContent=uOnly?tUF():tAF(); bu.className="uf-btn"+(uOnly?" on":""); }
   var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
+  // EN-mode subtitle: "X jokes translatable to English — switch to 中 for all"
+  var subEl=document.getElementById("sub-en");
+  if(subEl){
+    if(isEN()){
+      var translated=D.replies.filter(function(r){return r.i===true && r.te;}).length;
+      subEl.textContent=translated+" jokes translatable to English — switch to 中 for all";
+      subEl.style.display="block";
+    } else {
+      subEl.style.display="none";
+    }
+  }
 }
 
 function sL(l){
@@ -509,21 +600,19 @@ function sL(l){
   document.documentElement.lang = (l==="zh" ? "zh-TW" : "en");
   document.getElementById("bzh").className=(l==="zh"?"on-l":"");
   document.getElementById("ben").className=(l==="en"?"on-l":"");
+  pruneAF();
   aI(); bS(); bC(); rT();
 }
 
-function sV(v){
-  vw=v;
-  document.getElementById("blk").className=(v==="likes"?"on-v":"");
-  document.getElementById("bct").className=(v==="count"?"on-v":"");
-  aI(); bC();
-}
 
 (function(){
-  var sl = localStorage.getItem("wm_l") || "en";
-  _wlg = sl; wML(sl);
+  // First-load language: localStorage > browser language > en fallback
+  var stored = localStorage.getItem("wm_l");
+  var browserZH = (navigator.language || "en").toLowerCase().indexOf("zh") === 0;
+  var sl = stored || (browserZH ? "zh" : "en");
+  _wlg = sl; wML(sl); wRenderStep();
   if(localStorage.getItem("wm_s")==="1") document.getElementById("wm").style.display="none";
-  sL(sl); sV(vw);
+  sL(sl);
   function pulse(){ var h=document.getElementById("ch-hint"); if(h){ h.classList.add("glow"); setTimeout(function(){ h.classList.remove("glow"); },700); } }
   setTimeout(pulse, 1800);
   setInterval(pulse, 6000);

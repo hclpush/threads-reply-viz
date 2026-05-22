@@ -107,6 +107,8 @@ def rebuild_chart_data(replies, source_post, overrides):
         }
         if "intl" in r:
             row["i"] = bool(r["intl"])
+        if r.get("text_en"):
+            row["te"] = r["text_en"]
         compact.append(row)
 
     return {
