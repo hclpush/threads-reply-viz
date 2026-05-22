@@ -274,28 +274,28 @@ var _wStep = 1;
 
 var MODAL_CONTENT = {
   "en": {
-    s1_h1: "1,155 Cringe Moments",
-    s1_h2: "Public embarrassments from a viral Threads post —\nsorted into 10 categories.",
+    s1_h1: "1155 Cringe Moments",
+    s1_h2: "Public embarrassments from a viral Threads post\nsorted into 10 categories",
     s2_h1: "How to explore",
     s2_list: [
       "Click any chart bar or sidebar category to filter",
       "Search by reply text or @author",
     ],
     s3_h1: "Pick your language",
-    s3_h2_tpl: "We've translated {n} moments understandable for English speakers. Switch to 中 anytime for the full set.",
+    s3_h2_tpl: "We've translated {n} moments to English\nSwitch to 中 anytime for the full set",
     next: "Next", start: "Start exploring", back: "Back",
     dont_show: "Don't show this again",
   },
   "zh": {
-    s1_h1: "1,155 個社死現場",
-    s1_h2: "Threads 爆紅貼文的回覆精選，分成 10 個社死類別。",
+    s1_h1: "1155 個社死現場",
+    s1_h2: "Threads 爆紅貼文的回覆精選\n分成 10 個社死類別",
     s2_h1: "怎麼瀏覽",
     s2_list: [
       "點圖表的長條或側邊欄類別來篩選",
       "用搜尋框找回覆內容或 @作者",
     ],
     s3_h1: "選擇語言",
-    s3_h2_tpl: "我們翻譯了 {n} 則英文使用者也能看懂的笑點。中文版有全部 1,155 則。",
+    s3_h2_tpl: "我們翻譯了 {n} 則英文使用者也能看懂的笑點\n中文版有全部 1155 則",
     next: "下一步", start: "開始探索", back: "上一步",
     dont_show: "不要再顯示",
   }
@@ -582,16 +582,15 @@ function aI(){
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
   var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
-  // EN-mode subtitle: "X jokes translatable to English — switch to 中 for all"
+  // Language counterpart subtitle: same block width in both EN and 中 modes
   var subEl=document.getElementById("sub-en");
   if(subEl){
-    if(isEN()){
-      var translated=D.replies.filter(function(r){return r.i===true && r.te;}).length;
-      subEl.textContent=translated+" jokes translatable to English — switch to 中 for all";
-      subEl.style.display="block";
-    } else {
-      subEl.style.display="none";
-    }
+    var translated=D.replies.filter(function(r){return r.i===true && r.te;}).length;
+    var total=D.replies.length;
+    subEl.textContent = isEN()
+      ? (translated + " jokes translatable to English — switch to 中 for all")
+      : ("完整中文版 " + total + " 則 — 切換 EN 看 " + translated + " 則翻譯");
+    subEl.style.display="block";
   }
 }
 
