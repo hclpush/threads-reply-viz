@@ -101,6 +101,8 @@ tbody tr:hover{background:var(--bg3)}
 .lb:hover{background:var(--bg4);border-color:var(--br2)}
 .nr{text-align:center;padding:56px 20px;color:var(--mu);font-size:13px;line-height:1.6}
 footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(--mu2);text-align:center;flex-shrink:0}
+footer #rl{color:var(--mu2);text-decoration:underline;text-underline-offset:2px}
+footer #rl:hover{color:var(--tx2)}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -232,7 +234,7 @@ footer{padding:8px 20px;border-top:1px solid var(--br);font-size:10px;color:var(
     </div>
   </div>
 </div>
-<footer><span id="fs"></span></footer>
+<footer><span id="fs"></span><span class="fs-sep"> · </span><a id="rl" href="https://github.com/hclpush/threads-reply-viz/issues/new" target="_blank" rel="noopener"></a></footer>
 <script>
 var D = JSON.parse(decodeURIComponent(escape(atob("__DATA_B64__"))));
 var I = __I18N__;
@@ -580,6 +582,7 @@ function aI(){
   document.getElementById("c4").textContent=t("col_text");
   document.getElementById("c5").textContent=t("col_link");
   document.getElementById("fs").textContent=t("source");
+  document.getElementById("rl").textContent=t("report_issue");
   document.getElementById("nr").textContent=t("no_results");
   document.getElementById("sb_title").textContent=t("sidebar_title");
   var ch=document.getElementById("ch-hint"); if(ch) ch.textContent=tCH();
