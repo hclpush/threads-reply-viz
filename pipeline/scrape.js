@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SOURCE_POST = 'https://www.threads.com/@betabreakhsin/post/DXzS3YEEY8t';
+const SOURCE_POST = 'https://www.threads.com/@aiwithshin/post/DXzS3YEEY8t';
 const OUT_DIR = path.join(ROOT, 'data', 'staging');
 const OUT_FILE = path.join(OUT_DIR, 'raw-scraped.json');
 const EXISTING_FILE = path.join(ROOT, 'data', 'replies.json');
