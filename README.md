@@ -2,7 +2,7 @@
 
 An interactive analysis of replies to a viral Threads post asking people to share their most embarrassing public moments.
 
-**Source post:** [@betabreakhsin](https://www.threads.com/@betabreakhsin/post/DXzS3YEEY8t) — "大家人生中社死現場第一名是什麼？"
+**Source post:** [@aiwithshin](https://www.threads.com/@aiwithshin/post/DXzS3YEEY8t) — "大家人生中社死現場第一名是什麼？"
 
 ## Features
 
